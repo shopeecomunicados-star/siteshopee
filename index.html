@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Carrossel Sem Volta</title>
+<title>Carrossel Sem Tremida</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -52,33 +52,38 @@
     idx=to;
   }
 
-  /* swipe */
+  /* swipe com CLAMP */
   let startX=0,currentX=0,dragging=false,startY=0;
   c.addEventListener('touchstart',e=>{
     startX=e.touches[0].clientX;
     startY=e.touches[0].clientY;
     dragging=true;
-    t.style.transition='none'; /* remove animação durante drag */
+    t.style.transition='none';
   },{passive:false});
+
   c.addEventListener('touchmove',e=>{
     if(!dragging) return;
     currentX=e.touches[0].clientX;
     const diffX=startX-currentX;
     const diffY=Math.abs(e.touches[0].clientY-startY);
-    if(diffY>diffX) return; /* previne scroll vertical */
-    e.preventDefault(); /* bloqueia scroll da página */
-    t.style.transform=`translateX(${-idx*100 -diffX}px)`;
+    if(diffY>diffX) return;
+    e.preventDefault();
+    /* CLAMP: impede sair dos limites */
+    let raw=-idx*100 - (diffX/window.innerWidth)*100;
+    raw=Math.max(raw,-(total-1)*100);
+    raw=Math.min(raw,0);
+    t.style.transform=`translateX(${raw}%)`;
   },{passive:false});
+
   c.addEventListener('touchend',e=>{
     if(!dragging) return;
     dragging=false;
     const diff=startX-currentX;
-    if(Math.abs(diff)>50){ /* swipe válido */
-      const next=diff>0?(idx+1)%total:(idx-1+total)%total;
-      move(next);
-    }else{ /* volta pro slide original */
-      move(idx);
+    let next=idx;
+    if(Math.abs(diff)>50){
+      next=diff>0?Math.min(idx+1,total-1):Math.max(idx-1,0);
     }
+    move(next);
   });
 })();
 </script>
