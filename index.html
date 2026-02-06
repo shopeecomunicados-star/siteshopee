@@ -68,42 +68,80 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
 
-<!-- DESCRIÇÃO -->
+<!-- DESCRIÇÃO COM "VER MAIS" -->
 <div class="descricao-box">
-  <div class="desc-wrapper">
-    <span class="titulo">Especificações</span>
-    <span class="link" id="abrirModal">Estoque, Envio de &gt;</span>
-  </div>
-  <div class="linha"></div>
   <div class="desc-wrapper">
     <span class="titulo">Descrição</span>
   </div>
   <div class="linha"></div>
+
+  <!-- visível -->
   <div class="desc-wrapper">
-    <div class="desc-text">
-      Produto natural que aumenta ou diminui o tamanho dos seios em 7 dias, sem remédios e sem esforço. Aproveite!
+    <div class="desc-text" id="descResumo">
+      AIRSOFT BERETTA KL-92 SILVER GBB 6MM CB622<br>
+      A Pistola Airsoft KL-92, inspirada na clássica pistola italiana Beretta M92. Pistola cromada com detalhes em preto e alimentação por Green Gás. Tem excelente desempenho, chegando a 310 FPS* em média por disparo.
     </div>
   </div>
-</div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <span>Especificação</span>
-      <button class="close-btn" id="fecharModal">&times;</button>
+  <!-- oculto -->
+  <div id="descCompleta" style="display:none">
+    <div class="desc-wrapper">
+      <div class="desc-text">
+        <strong>Especificações:</strong><br>
+        - Marca: Rossi<br>
+        - Modo de disparo: Automático e Semiautomático<br>
+        - Engatilhamento: Dupla Ação (Simples e Dupla)<br>
+        - Munição utilizada - Esferas Plásticas<br>
+        - Velocidade máxima (m/s) - 95 M/S<br>
+        - Peso munição referência velocidade (g) - 0,20g<br>
+        - Energia (joule) - 0,9 Joule<br>
+        - Peso do produto - 835g<br>
+        - Comprimento do produto - 235mm<br>
+        - Material do produto - Metal/Polímero<br>
+        - Cano (comprimento) - 115mm<br>
+        - Cano (acabamento) - Metal<br>
+        - Capacidade de munição - 22<br>
+        - Trava de segurança - Manual<br>
+        - Alça de mira - Fixa<br>
+        - Fibra ótica - Não possui<br>
+        - Massa de mira - Fixa<br>
+        - Trilho (tipo) - Picatinny<br>
+        - Trilho (tamanho) - 22mm<br>
+        - Blowback - Possui<br>
+        - Ferrolho - Móvel<br>
+        - Hop up - Regulável<br>
+        - Hop up (material) - Metal<br>
+        - Diâmetro interno do cano - 6,08mm<br>
+        - Cor do item - Prata e Preto<br>
+        - Ponteira (cor) - Vermelha<br>
+        - Ponteira (material) - Metal<br>
+        - Ponteira (rosca) - 14mm<br>
+        - Velocidade máxima (fps) - 311FPS<br>
+        - Peso munição referência velocidade (grain) - 3,08Grain<br><br>
+        <strong>Itens Inclusos:</strong><br>
+        - 01un Pistola KL-92 Silver<br>
+        Imagens meramente ilustrativas.
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="item"><span>Estoque</span><span>100</span></div>
-      <div class="item"><span>Envio de</span><span>Guarujá</span></div>
-    </div>
-    <div class="modal-footer">
-      <button class="ok-btn" id="okBtn">Ok</button>
-    </div>
+  </div>
+
+  <!-- botão -->
+  <div class="desc-wrapper">
+    <button id="btnVerMais" style="background:#ff6600;color:#fff;border:none;border-radius:4px;padding:6px 14px;font-size:14px;cursor:pointer">Ver mais</button>
   </div>
 </div>
 
 <script>
+const btn = document.getElementById('btnVerMais');
+const extra = document.getElementById('descCompleta');
+let aberto = false;
+
+btn.addEventListener('click', () => {
+  aberto = !aberto;
+  extra.style.display = aberto ? 'block' : 'none';
+  btn.textContent = aberto ? 'Ver menos' : 'Ver mais';
+});
+
 /* ---------- CARROSSEL ---------- */
 (()=>{
   const c=document.getElementById('c');
