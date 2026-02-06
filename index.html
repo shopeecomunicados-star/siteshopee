@@ -183,15 +183,18 @@ function curtidaBtn(id, qtd){
   return `
     <button onclick="curtir(this, ${id})"
       style="background:none;border:none;color:#757575;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px">
-      💎 útil (${qtd})
+      👍 útil (${qtd})
     </button>
   `;
 }
 
+
 window.curtir = function(btn){
-  const novo = parseInt(btn.textContent.match(/\d+/)[0]) + 1;
-  btn.textContent = btn.textContent.replace(/\d+/, novo);
+  const numero = btn.textContent.match(/\d+/)[0];
+  const novo = parseInt(numero) + 1;
+  btn.innerHTML = `👍 útil (${novo})`;
   btn.style.color = '#ee4d2d';
+  btn.style.fontWeight = '500';
   btn.onclick = null;
 };
 
