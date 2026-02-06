@@ -7,14 +7,14 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 .topo{width:100%;display:block}
-.carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
+.carousel{position:relative;width:100%;overflow:hidden:hidden;touch-action:pan-y}
 .track{display:flex;transition:transform .32s ease-out}
 .slide{flex:0 0 100%;height:50vh;background:center/cover no-repeat}
 .thumbs{width:100%;display:flex;justify-content:center;gap:6px;padding:8px 4px 0}
 .thumb{width:17.5%;aspect-ratio:1/1;background:center/cover no-repeat;border:1px solid rgba(0,0,0,.3);cursor:pointer;transition:border-color .2s}
 .thumb.active{border-color:#000}
 .preco-img{width:100%;display:block;margin:0}
-.faixa{height:9px;background:#d0d0d0}
+.faixa{height:9px;background:#d0d0d0}   /* <-- 9 px */
 .loja-img{width:100%;display:block;margin:0}
 </style>
 </head>
@@ -31,7 +31,9 @@
   </div>
 </div>
 
+<!-- ⚠️  ESSA LINHA NÃO PODE FALTAR  -->
 <div class="thumbs" id="thumbs"></div>
+
 <img class="preco-img" src="preco.jpg" alt="Preço">
 <div class="faixa"></div>
 <img class="loja-img" src="loja.jpg" alt="Loja">
@@ -73,7 +75,7 @@
     let raw=-idx*100 - (diffX/window.innerWidth)*100;
     raw=Math.max(raw,-(total-1)*100);
     raw=Math.min(raw,0);
-    t.style.transform=`translateX(${raw}%)`);
+    t.style.transform=`translateX(${raw}%)`;
     e.preventDefault();
   },{passive:false});
   c.addEventListener('touchend',e=>{
