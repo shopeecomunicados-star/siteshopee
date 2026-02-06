@@ -37,6 +37,12 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 .linha{height:1px;background:#d0d0d0;margin:0}
 .desc-text{font-size:14px;line-height:1.45}
 
+/* ---------- BOTÃO VER MAIS ---------- */
+.verMaisCenter{display:flex;justify-content:center;padding:8px 0}
+.verMaisBtn{background:none;border:none;color:#ff6600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.verMaisBtn .seta{font-size:10px;transition:transform .2s}
+.verMaisBtn.aberta .seta{transform:rotate(180deg)}
+
 /* ---------- MODAL ---------- */
 .modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none}
 .modal-content{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:12px 12px 0 0;animation:slideUp .25s ease}
@@ -47,12 +53,6 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 .modal-footer{padding:0 16px 16px;display:flex;justify-content:center}
 .modal-footer .ok-btn{background:#EE4D2D;color:#fff;border:none;border-radius:4px;width:100%;max-width:320px;padding:12px 0;font-size:16px;font-weight:500;cursor:pointer}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-
-/* ---------- BOTÃO VER MAIS ---------- */
-.verMaisCenter{display:flex;justify-content:center;padding:8px 0}
-.verMaisBtn{background:none;border:none;color:#ff6600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:4px}
-.verMaisBtn .seta{font-size:10px;transition:transform .2s}
-.verMaisBtn.aberta .seta{transform:rotate(180deg)}
 </style>
 </head>
 <body>
@@ -73,6 +73,15 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 <div class="faixa"></div>
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
+
+<!-- BLOCO ESPECIFICAÇÕES + ESTOQUE/ENVIO -->
+<div class="descricao-box">
+  <div class="desc-wrapper">
+    <span class="titulo">Especificações</span>
+    <span class="link" id="abrirModal">Estoque, Envio de &gt;</span>
+  </div>
+  <div class="linha"></div>
+</div>
 
 <!-- DESCRIÇÃO -->
 <div class="descricao-box">
@@ -109,7 +118,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
         - Capacidade de munição - 22<br>
         - Trava de segurança - Manual<br>
         - Alça de mira - Fixa<br>
-        - Fibra óptica - Não possui<br>
+        - Fibra ótica - Não possui<br>
         - Massa de mira - Fixa<br>
         - Trilho (tipo) - Picatinny<br>
         - Trilho (tamanho) - 22mm<br>
@@ -229,7 +238,7 @@ btn.addEventListener('click', () => {
   const okBtn=document.getElementById('okBtn');
 
   const abre=()=>modal.style.display='flex';
-  const fecha=()=>modal.style.display='none';
+ const fecha=()=>modal.style.display='none';
 
   abrir.addEventListener('click',abre);
   fechar.addEventListener('click',fecha);
