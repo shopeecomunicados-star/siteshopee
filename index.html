@@ -39,7 +39,9 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 </style>
 </head>
 <body>
+
 <img class="topo" src="topo.jpg" alt="Topo">
+
 <div class="carousel" id="c">
   <div class="track" id="t">
     <div class="slide" style="background-image:url(1.jpg)"></div>
@@ -49,13 +51,14 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
     <div class="slide" style="background-image:url(5.jpg)"></div>
   </div>
 </div>
+
 <div class="thumbs" id="thumbs"></div>
+
 <img class="preco-img" src="preco.jpg" alt="Preço">
 <div class="faixa"></div>
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
 
-<!-- BLOCO ESPECIFICAÇÕES + ESTOQUE/ENVIO -->
 <div class="descricao-box">
   <div class="desc-wrapper">
     <span class="titulo">Especificações</span>
@@ -64,7 +67,6 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
   <div class="linha"></div>
 </div>
 
-<!-- DESCRIÇÃO -->
 <div class="descricao-box">
   <div class="desc-wrapper"><span class="titulo">Descrição</span></div>
   <div class="linha"></div>
@@ -74,6 +76,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
       A Pistola Airsoft KL-92, inspirada na clássica pistola italiana Beretta M92. Pistola cromada com detalhes em preto e alimentação por Green Gás. Tem excelente desempenho, chegando a 310 FPS* em média por disparo.
     </div>
   </div>
+
   <div id="descCompleta" style="display:none">
     <div class="desc-wrapper">
       <div class="desc-text">
@@ -116,12 +119,12 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
       </div>
     </div>
   </div>
+
   <div class="verMaisCenter">
     <button id="btnVerMais" class="verMaisBtn">Ver mais <span class="seta">▼</span></button>
   </div>
 </div>
 
-<!-- FAIXA SEPARA DESCRIÇÃO / AVALIAÇÕES -->
 <div class="faixa"></div>
 
 <div class="descricao-box">
@@ -136,8 +139,6 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
   <div id="avaliacoes"></div>
 </div>
 
-
-<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -155,7 +156,6 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 </div>
 
 <script>
-/* ---------- DESCRIÇÃO EXPANDÍVEL ---------- */
 const btn = document.getElementById('btnVerMais');
 const extra = document.getElementById('descCompleta');
 let aberto = false;
@@ -166,7 +166,6 @@ btn.addEventListener('click', () => {
   btn.classList.toggle('aberta', aberto);
 });
 
-/* ---------- AVALIAÇÕES ---------- */
 const dados = [
   {nome:'Carlos S.', foto:'perfil1.jpg', produto:'prod1.jpg', txt:'Chegou rápido e o blowback é muito realista! Já testei no campo e os 311 fps se confirmam.', curtidas:12},
   {nome:'Lucas M.', foto:'perfil2.jpg', produto:'prod2.jpg', txt:'Acabamento perfeito, peso idêntico à original. Hop-up regulável é um diferencial.', curtidas:8},
@@ -178,32 +177,43 @@ const dados = [
   {nome:'Bruno L.', foto:'perfil8.jpg', produto:'prod8.jpg', txt:'Material metal/polímero equilibra peso e resistência. Já caiu no chão e não quebrou.', curtidas:11}
 ];
 
-
 function estrelas(){ return `<span style="color:#ffa500">★★★★★</span>`; }
+
 function curtidaBtn(id, qtd){
-  return `<button onclick="curtir(this, ${id})" style="background:none;border:none;color:#757575;font-size:12px;cursor:pointer">útil (${qtd})</button>`;
+  return `
+    <button onclick="curtir(this, ${id})"
+      style="background:none;border:none;color:#757575;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px">
+      💎 útil (${qtd})
+    </button>
+  `;
 }
-window.curtir = function(btn, id){
-  const novo = parseInt(btn.textContent.match(/\d+/)[0])+1;
+
+window.curtir = function(btn){
+  const novo = parseInt(btn.textContent.match(/\d+/)[0]) + 1;
   btn.textContent = btn.textContent.replace(/\d+/, novo);
   btn.style.color = '#ee4d2d';
   btn.onclick = null;
 };
+
 const box = document.getElementById('avaliacoes');
 dados.forEach((d,i)=>{
   box.innerHTML += `
   <div style="padding:12px 16px;border-bottom:1px solid #e0e0e0">
     <div style="display:flex;align-items:center;gap:8px">
       <img src="${d.foto}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">
-      <div style="flex:1;font-size:14px">${d.nome}<br>${estrelas()}</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px">${d.nome}</span>
+          ${curtidaBtn(i, d.curtidas)}
+        </div>
+        <div>${estrelas()}</div>
+      </div>
     </div>
     <div style="margin-top:6px;font-size:14px">${d.txt}</div>
     <img src="${d.produto}" style="width:72px;height:72px;object-fit:cover;border-radius:4px;margin-top:6px">
-    <div style="margin-top:6px">${curtidaBtn(i, d.curtidas)}</div>
-</div>`;
+  </div>`;
 });
 
-/* ---------- CARROSSEL ---------- */
 (()=>{
   const c=document.getElementById('c');
   const t=document.getElementById('t');
@@ -251,7 +261,6 @@ dados.forEach((d,i)=>{
     move(next);
   });
 
-  /* ---------- MODAL ---------- */
   const modal=document.getElementById('modal');
   const abrir=document.getElementById('abrirModal');
   const fechar=document.getElementById('fecharModal');
@@ -264,5 +273,6 @@ dados.forEach((d,i)=>{
   modal.addEventListener('click',e=>{if(e.target===modal) fecha()});
 })();
 </script>
+
 </body>
 </html>
