@@ -47,6 +47,12 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 .modal-footer{padding:0 16px 16px;display:flex;justify-content:center}
 .modal-footer .ok-btn{background:#EE4D2D;color:#fff;border:none;border-radius:4px;width:100%;max-width:320px;padding:12px 0;font-size:16px;font-weight:500;cursor:pointer}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+/* ---------- BOTÃO VER MAIS ---------- */
+.verMaisCenter{display:flex;justify-content:center;padding:8px 0}
+.verMaisBtn{background:none;border:none;color:#ff6600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.verMaisBtn .seta{font-size:10px;transition:transform .2s}
+.verMaisBtn.aberta .seta{transform:rotate(180deg)}
 </style>
 </head>
 <body>
@@ -68,7 +74,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
 
-<!-- DESCRIÇÃO COM "VER MAIS" -->
+<!-- DESCRIÇÃO -->
 <div class="descricao-box">
   <div class="desc-wrapper">
     <span class="titulo">Descrição</span>
@@ -103,7 +109,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
         - Capacidade de munição - 22<br>
         - Trava de segurança - Manual<br>
         - Alça de mira - Fixa<br>
-        - Fibra ótica - Não possui<br>
+        - Fibra óptica - Não possui<br>
         - Massa de mira - Fixa<br>
         - Trilho (tipo) - Picatinny<br>
         - Trilho (tamanho) - 22mm<br>
@@ -118,6 +124,8 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
         - Ponteira (rosca) - 14mm<br>
         - Velocidade máxima (fps) - 311FPS<br>
         - Peso munição referência velocidade (grain) - 3,08Grain<br><br>
+        <strong>Serve para:</strong><br>
+        - Airsoft / Colecionismo / Treino tático<br><br>
         <strong>Itens Inclusos:</strong><br>
         - 01un Pistola KL-92 Silver<br>
         Imagens meramente ilustrativas.
@@ -125,13 +133,33 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
     </div>
   </div>
 
-  <!-- botão -->
-  <div class="desc-wrapper">
-    <button id="btnVerMais" style="background:#ff6600;color:#fff;border:none;border-radius:4px;padding:6px 14px;font-size:14px;cursor:pointer">Ver mais</button>
+  <!-- botão centralizado -->
+  <div class="verMaisCenter">
+    <button id="btnVerMais" class="verMaisBtn">
+      Ver mais <span class="seta">▼</span>
+    </button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Especificação</span>
+      <button class="close-btn" id="fecharModal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="item"><span>Estoque</span><span>100</span></div>
+      <div class="item"><span>Envio de</span><span>Guarujá</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="ok-btn" id="okBtn">Ok</button>
+    </div>
   </div>
 </div>
 
 <script>
+/* ---------- DESCRIÇÃO EXPANDÍVEL ---------- */
 const btn = document.getElementById('btnVerMais');
 const extra = document.getElementById('descCompleta');
 let aberto = false;
@@ -139,7 +167,8 @@ let aberto = false;
 btn.addEventListener('click', () => {
   aberto = !aberto;
   extra.style.display = aberto ? 'block' : 'none';
-  btn.textContent = aberto ? 'Ver menos' : 'Ver mais';
+  btn.innerHTML = (aberto ? 'Ver menos' : 'Ver mais') + ' <span class="seta">▼</span>';
+  btn.classList.toggle('aberta', aberto);
 });
 
 /* ---------- CARROSSEL ---------- */
