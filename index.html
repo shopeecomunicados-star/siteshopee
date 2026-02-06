@@ -17,16 +17,33 @@
 .faixa{height:9px;background:#d0d0d0}
 .loja-img{width:100%;display:block;margin:0}
 
-.descricao-box{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-size:16px;background:#fff}
-.descricao-box span{font-weight:bold}
-.descricao-box .link{color:#0066cc;cursor:pointer}
+/* Fonte Shopee (Roboto) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+.descricao-box{
+  font-family:'Roboto',sans-serif;
+  font-size:14px;
+  font-weight:400;
+  color:#212121;
+  background:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 16px;
+  border-bottom:1px solid #f1f1f1
+}
+.descricao-box span{font-weight:500}
+.descricao-box .link{
+  color:#757575;          /* cinza mais escuro que a faixa */
+  cursor:pointer
+}
 
 .modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none;justify-content:center;align-items:center}
-.modal-content{background:#fff;border-radius:6px;width:90%;max-width:280px;padding:0;animation:slideUp .25s ease}
+.modal-content{background:#fff;border-radius:6px;width:90%;max-width:280px;padding:0;animation:slideUp .25s ease;font-family:'Roboto',sans-serif}
 .modal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #000}
-.modal-header span{font-weight:bold}
-.modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer}
-.modal-body{padding:14px}
+.modal-header span{font-weight:500;font-size:16px;color:#212121}
+.modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#212121}
+.modal-body{padding:14px;font-size:14px;color:#212121}
 .modal-body .item{display:flex;justify-content:space-between;margin-bottom:8px}
 
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
