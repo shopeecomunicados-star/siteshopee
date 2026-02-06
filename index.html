@@ -59,6 +59,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
 
+<!-- BLOCO ESPECIFICAÇÕES + ESTOQUE/ENVIO -->
 <div class="descricao-box">
   <div class="desc-wrapper">
     <span class="titulo">Especificações</span>
@@ -67,6 +68,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
   <div class="linha"></div>
 </div>
 
+<!-- DESCRIÇÃO -->
 <div class="descricao-box">
   <div class="desc-wrapper"><span class="titulo">Descrição</span></div>
   <div class="linha"></div>
@@ -76,7 +78,6 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
       A Pistola Airsoft KL-92, inspirada na clássica pistola italiana Beretta M92. Pistola cromada com detalhes em preto e alimentação por Green Gás. Tem excelente desempenho, chegando a 310 FPS* em média por disparo.
     </div>
   </div>
-
   <div id="descCompleta" style="display:none">
     <div class="desc-wrapper">
       <div class="desc-text">
@@ -119,7 +120,6 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
       </div>
     </div>
   </div>
-
   <div class="verMaisCenter">
     <button id="btnVerMais" class="verMaisBtn">Ver mais <span class="seta">▼</span></button>
   </div>
@@ -139,6 +139,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
   <div id="avaliacoes"></div>
 </div>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -156,6 +157,7 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
 </div>
 
 <script>
+/* ---------- DESCRIÇÃO EXPANDÍVEL ---------- */
 const btn = document.getElementById('btnVerMais');
 const extra = document.getElementById('descCompleta');
 let aberto = false;
@@ -166,6 +168,7 @@ btn.addEventListener('click', () => {
   btn.classList.toggle('aberta', aberto);
 });
 
+/* ---------- AVALIAÇÕES ---------- */
 const dados = [
   {nome:'Carlos S.', foto:'perfil1.jpg', produto:'prod1.jpg', txt:'Chegou rápido e o blowback é muito realista! Já testei no campo e os 311 fps se confirmam.', curtidas:12},
   {nome:'Lucas M.', foto:'perfil2.jpg', produto:'prod2.jpg', txt:'Acabamento perfeito, peso idêntico à original. Hop-up regulável é um diferencial.', curtidas:8},
@@ -181,20 +184,18 @@ function estrelas(){ return `<span style="color:#ffa500">★★★★★</span>`
 
 function curtidaBtn(id, qtd){
   return `
-    <button onclick="curtir(this, ${id})"
+    <button onclick="curtir(this)"
       style="background:none;border:none;color:#757575;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px">
-      👍 útil (${qtd})
+      <img src="like.png" style="width:12px;height:12px">
+      útil (${qtd})
     </button>
   `;
 }
 
-
 window.curtir = function(btn){
-  const numero = btn.textContent.match(/\d+/)[0];
-  const novo = parseInt(numero) + 1;
-  btn.innerHTML = `👍 útil (${novo})`;
+  const n = parseInt(btn.textContent.match(/\d+/)[0]) + 1;
+  btn.innerHTML = `<img src="like.png" style="width:12px;height:12px"> útil (${n})`;
   btn.style.color = '#ee4d2d';
-  btn.style.fontWeight = '500';
   btn.onclick = null;
 };
 
@@ -202,21 +203,19 @@ const box = document.getElementById('avaliacoes');
 dados.forEach((d,i)=>{
   box.innerHTML += `
   <div style="padding:12px 16px;border-bottom:1px solid #e0e0e0">
-    <div style="display:flex;align-items:center;gap:8px">
-      <img src="${d.foto}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">
-      <div style="flex:1">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <span style="font-size:14px">${d.nome}</span>
-          ${curtidaBtn(i, d.curtidas)}
-        </div>
-        <div>${estrelas()}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="${d.foto}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">
+        <div style="flex:1;font-size:14px">${d.nome}<br>${estrelas()}</div>
       </div>
+      ${curtidaBtn(i, d.curtidas)}
     </div>
     <div style="margin-top:6px;font-size:14px">${d.txt}</div>
     <img src="${d.produto}" style="width:72px;height:72px;object-fit:cover;border-radius:4px;margin-top:6px">
   </div>`;
 });
 
+/* ---------- CARROSSEL + MODAL ---------- */
 (()=>{
   const c=document.getElementById('c');
   const t=document.getElementById('t');
@@ -268,12 +267,10 @@ dados.forEach((d,i)=>{
   const abrir=document.getElementById('abrirModal');
   const fechar=document.getElementById('fecharModal');
   const okBtn=document.getElementById('okBtn');
-  const abre=()=>modal.style.display='flex';
-  const fecha=()=>modal.style.display='none';
-  abrir.addEventListener('click',abre);
-  fechar.addEventListener('click',fecha);
-  okBtn.addEventListener('click',fecha);
-  modal.addEventListener('click',e=>{if(e.target===modal) fecha()});
+  abrir.addEventListener('click',()=>modal.style.display='flex');
+  fechar.addEventListener('click',()=>modal.style.display='none');
+  okBtn.addEventListener('click',()=>modal.style.display='none');
+  modal.addEventListener('click',e=>{if(e.target===modal) modal.style.display='none'});
 })();
 </script>
 
