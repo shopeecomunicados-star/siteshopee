@@ -2,20 +2,34 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Carrossel + Miniaturas + Preço + Faixa + Loja</title>
+<title>Carrossel + Miniaturas + Preço + Faixa + Loja + Descrição</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 .topo{width:100%;display:block}
-.carousel{position:relative;width:100%;overflow:hidden:hidden;touch-action:pan-y}
+.carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
 .track{display:flex;transition:transform .32s ease-out}
 .slide{flex:0 0 100%;height:50vh;background:center/cover no-repeat}
 .thumbs{width:100%;display:flex;justify-content:center;gap:6px;padding:8px 4px 0}
 .thumb{width:17.5%;aspect-ratio:1/1;background:center/cover no-repeat;border:1px solid rgba(0,0,0,.3);cursor:pointer;transition:border-color .2s}
 .thumb.active{border-color:#000}
 .preco-img{width:100%;display:block;margin:0}
-.faixa{height:9px;background:#d0d0d0}   /* <-- 9 px */
+.faixa{height:9px;background:#d0d0d0}
 .loja-img{width:100%;display:block;margin:0}
+
+.descricao-box{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-size:16px;background:#fff}
+.descricao-box span{font-weight:bold}
+.descricao-box .link{color:#0066cc;cursor:pointer}
+
+.modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none;justify-content:center;align-items:center}
+.modal-content{background:#fff;border-radius:6px;width:90%;max-width:280px;padding:0;animation:slideUp .25s ease}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #000}
+.modal-header span{font-weight:bold}
+.modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer}
+.modal-body{padding:14px}
+.modal-body .item{display:flex;justify-content:space-between;margin-bottom:8px}
+
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -31,15 +45,41 @@
   </div>
 </div>
 
-<!-- ⚠️  ESSA LINHA NÃO PODE FALTAR  -->
 <div class="thumbs" id="thumbs"></div>
-
 <img class="preco-img" src="preco.jpg" alt="Preço">
 <div class="faixa"></div>
 <img class="loja-img" src="loja.jpg" alt="Loja">
+<div class="faixa"></div>
+
+<!-- Área descrição -->
+<div class="descricao-box">
+  <span>Especificações</span>
+  <span class="link" id="abrirModal">Estoque, Envio de &gt;</span>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Especificação</span>
+      <button class="close-btn" id="fecharModal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="item">
+        <span>Estoque</span>
+        <span>100</span>
+      </div>
+      <div class="item">
+        <span>Envio de</span>
+        <span>Guarujá</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (()=>{
+  // Carrossel (mesmo código anterior)
   const c=document.getElementById('c');
   const t=document.getElementById('t');
   const slides=[...t.children];
@@ -87,6 +127,17 @@
       next=diff>0?Math.min(idx+1,total-1):Math.max(idx-1,0);
     }
     move(next);
+  });
+
+  // Modal
+  const modal=document.getElementById('modal');
+  const abrir=document.getElementById('abrirModal');
+  const fechar=document.getElementById('fecharModal');
+
+  abrir.addEventListener('click',()=>modal.style.display='flex');
+  fechar.addEventListener('click',()=>modal.style.display='none');
+  modal.addEventListener('click',e=>{
+    if(e.target===modal) modal.style.display='none';
   });
 })();
 </script>
