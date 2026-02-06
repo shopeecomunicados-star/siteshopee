@@ -5,46 +5,55 @@
 <title>Carrossel + Miniaturas + Preço + Faixa + Loja + Descrição</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <style>
+/* --- reset e base --- */
 *{box-sizing:border-box;margin:0;padding:0}
-.topo{width:100%;display:block}
+body{font-family:'Roboto',sans-serif;background:#f5f5f5}
+img{width:100%;display:block}
+
+/* --- carrossel --- */
 .carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
 .track{display:flex;transition:transform .32s ease-out}
 .slide{flex:0 0 100%;height:50vh;background:center/cover no-repeat}
-.thumbs{width:100%;display:flex;justify-content:center;gap:6px;padding:8px 4px 0}
-.thumb{width:17.5%;aspect-ratio:1/1;background:center/cover no-repeat;border:1px solid rgba(0,0,0,.3);cursor:pointer;transition:border-color .2s}
+.thumbs{display:flex;justify-content:center;gap:6px;padding:8px 4px 0;background:#fff}
+.thumb{flex:0 0 17.5%;aspect-ratio:1/1;background:center/cover;border:2px solid transparent;cursor:pointer}
 .thumb.active{border-color:#000}
-.preco-img{width:100%;display:block;margin:0}
+
+/* --- faixas --- */
 .faixa{height:9px;background:#d0d0d0}
-.loja-img{width:100%;display:block;margin:0}
 
-/* Fonte Shopee (Roboto) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-
+/* --- descrição --- */
 .descricao-box{
-  font-family:'Roboto',sans-serif;
-  font-size:14px;
-  font-weight:400;
-  color:#212121;
   background:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 16px;font-size:14px;font-weight:500;color:#212121;
   border-bottom:1px solid #f1f1f1
 }
-.descricao-box span{font-weight:500}
-.descricao-box .link{
-  color:#757575;          /* cinza mais escuro que a faixa */
-  cursor:pointer
-}
+.descricao-box .link{color:#757575;cursor:pointer}
 
-.modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none;justify-content:center;align-items:center}
-.modal-content{background:#fff;border-radius:6px;width:90%;max-width:280px;padding:0;animation:slideUp .25s ease;font-family:'Roboto',sans-serif}
-.modal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #000}
-.modal-header span{font-weight:500;font-size:16px;color:#212121}
+/* --- modal rodapé --- */
+.modal{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,.45);display:none
+}
+.modal-content{
+  position:absolute;bottom:0;left:0;right:0;
+  background:#fff;border-radius:12px 12px 0 0;
+  animation:slideUp .25s ease
+}
+.modal-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;font-size:16px;font-weight:500;color:#212121
+}
 .modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#212121}
-.modal-body{padding:14px;font-size:14px;color:#212121}
-.modal-body .item{display:flex;justify-content:space-between;margin-bottom:8px}
+.modal-body{padding:0 16px 16px;font-size:14px;color:#212121}
+.modal-body .item{display:flex;justify-content:space-between;padding:6px 0}
+.modal-footer{
+  padding:0 16px 16px;display:flex;justify-content:center
+}
+.modal-footer .ok-btn{
+  background:#EE4D2D;color:#fff;border:none;border-radius:4px;
+  width:100%;max-width:320px;padding:12px 0;font-size:16px;font-weight:500;cursor:pointer
+}
 
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 </style>
@@ -68,13 +77,13 @@
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
 
-<!-- Área descrição -->
+<!-- descrição -->
 <div class="descricao-box">
   <span>Especificações</span>
   <span class="link" id="abrirModal">Estoque, Envio de &gt;</span>
 </div>
 
-<!-- Modal -->
+<!-- modal rodapé -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -82,21 +91,18 @@
       <button class="close-btn" id="fecharModal">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="item">
-        <span>Estoque</span>
-        <span>100</span>
-      </div>
-      <div class="item">
-        <span>Envio de</span>
-        <span>Guarujá</span>
-      </div>
+      <div class="item"><span>Estoque</span><span>100</span></div>
+      <div class="item"><span>Envio de</span><span>Guarujá</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="ok-btn" id="okBtn">Ok</button>
     </div>
   </div>
 </div>
 
 <script>
 (()=>{
-  // Carrossel (mesmo código anterior)
+  // carrossel
   const c=document.getElementById('c');
   const t=document.getElementById('t');
   const slides=[...t.children];
@@ -146,16 +152,19 @@
     move(next);
   });
 
-  // Modal
+  // modal
   const modal=document.getElementById('modal');
   const abrir=document.getElementById('abrirModal');
   const fechar=document.getElementById('fecharModal');
+  const okBtn=document.getElementById('okBtn');
 
-  abrir.addEventListener('click',()=>modal.style.display='flex');
-  fechar.addEventListener('click',()=>modal.style.display='none');
-  modal.addEventListener('click',e=>{
-    if(e.target===modal) modal.style.display='none';
-  });
+  const abre=()=>modal.style.display='flex';
+  const fecha=()=>modal.style.display='none';
+
+  abrir.addEventListener('click',abre);
+  fechar.addEventListener('click',fecha);
+  okBtn.addEventListener('click',fecha);
+  modal.addEventListener('click',e=>{if(e.target===modal) fecha()});
 })();
 </script>
 </body>
