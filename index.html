@@ -2,21 +2,22 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Carrossel Sem Tremida</title>
+<title>Carrossel + Miniaturas</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 .topo{width:100%;display:block}
 .carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
-.track{display:flex;transition:none}
+.track{display:flex;transition:transform .32s ease-out}
 .slide{flex:0 0 100%;height:50vh;background:center/cover no-repeat}
-.dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.dot{width:8px;height:8px;border-radius:50%;background:#fff9;transition:.3s}
-.dot.active{background:#fff}
+.thumbs{width:100%;display:flex;justify-content:center;gap:6px;padding:8px 0}
+.thumb{width:18%;aspect-ratio:1/1;background:center/cover no-repeat;border:2px solid transparent;cursor:pointer;transition:border .2s}
+.thumb.active{border-color:#fff}
 </style>
 </head>
 <body>
 <img class="topo" src="topo.jpg" alt="Topo">
+
 <div class="carousel" id="c">
   <div class="track" id="t">
     <div class="slide" style="background-image:url(1.jpg)"></div>
@@ -25,8 +26,9 @@
     <div class="slide" style="background-image:url(4.jpg)"></div>
     <div class="slide" style="background-image:url(5.jpg)"></div>
   </div>
-  <div class="dots" id="d"></div>
 </div>
+
+<div class="thumbs" id="thumbs"></div>
 
 <script>
 (()=>{
@@ -36,45 +38,40 @@
   const total=slides.length;
   let idx=0;
 
-  /* dots */
-  const dotsDiv=document.getElementById('d');
-  slides.forEach((_,i)=>{
-    const dot=document.createElement('span');
-    dot.className='dot'+(i===0?' active':'');
-    dotsDiv.appendChild(dot);
+  /* cria miniaturas */
+  const thumbsDiv=document.getElementById('thumbs');
+  slides.forEach((s,i)=>{
+    const thumb=document.createElement('div');
+    thumb.className='thumb'+(i===0?' active':'');
+    thumb.style.backgroundImage=s.style.backgroundImage;
+    thumb.addEventListener('click',()=>move(i));
+    thumbsDiv.appendChild(thumb);
   });
-  const dots=[...dotsDiv.children];
+  const thumbs=[...thumbsDiv.children];
 
   function move(to){
-    t.style.transition='transform .3s ease-out';
     t.style.transform=`translateX(${-to*100}%)`;
-    dots.forEach((d,i)=>d.classList.toggle('active',i===to));
+    thumbs.forEach((th,i)=>th.classList.toggle('active',i===to));
     idx=to;
   }
 
-  /* swipe com CLAMP */
-  let startX=0,currentX=0,dragging=false,startY=0;
+  /* swipe com clamp (mesmo código anterior) */
+  let startX=0,currentX=0,dragging=false;
   c.addEventListener('touchstart',e=>{
     startX=e.touches[0].clientX;
-    startY=e.touches[0].clientY;
     dragging=true;
     t.style.transition='none';
   },{passive:false});
-
   c.addEventListener('touchmove',e=>{
     if(!dragging) return;
     currentX=e.touches[0].clientX;
     const diffX=startX-currentX;
-    const diffY=Math.abs(e.touches[0].clientY-startY);
-    if(diffY>diffX) return;
-    e.preventDefault();
-    /* CLAMP: impede sair dos limites */
     let raw=-idx*100 - (diffX/window.innerWidth)*100;
     raw=Math.max(raw,-(total-1)*100);
     raw=Math.min(raw,0);
     t.style.transform=`translateX(${raw}%)`;
+    e.preventDefault();
   },{passive:false});
-
   c.addEventListener('touchend',e=>{
     if(!dragging) return;
     dragging=false;
