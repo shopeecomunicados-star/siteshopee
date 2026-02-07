@@ -100,12 +100,15 @@ body{
 
 
 .bottom-left .btn-small img{
-  width:26px !important;
-  height:26px !important;
-  min-width:26px;
-  min-height:26px;
-  filter:brightness(0) invert(1);
+  width: 28px !important;
+  height: 28px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;        /* evita distorção */
+  display: block;
+  filter: brightness(0) invert(1);
 }
+
 
 
 
