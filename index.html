@@ -76,6 +76,7 @@ body{
   display:flex;
 }
 
+/* ===== BOTÕES VERDES SHOPEE ===== */
 .bottom-left .btn-small{
   flex:1;
   display:flex;
@@ -83,20 +84,31 @@ body{
   align-items:center;
   justify-content:center;
   font-size:11px;
-  color:#ee4d2d;
+  color:#fff;                 /* TEXTO BRANCO */
+  background:#26aa99;         /* VERDE SHOPEE */
   cursor:pointer;
+  text-align:center;
+  padding:4px 2px;
 }
 
-.bottom-left .divider{
-  width:1px;
-  background:#e0e0e0;
+.bottom-left .btn-small span{
+  font-size:11px;
+  line-height:1.2;
+  white-space:normal;
 }
 
 .bottom-left img{
-  width:20px;
-  height:20px;
+  width:18px;
+  height:18px;
   margin-bottom:2px;
+  filter:brightness(0) invert(1); /* ícone branco */
 }
+
+/* remove a linha divisória branca no meio */
+.bottom-left .divider{
+  background:#1f8f81;
+}
+
 
 .bottom-buy{
   flex:1;
@@ -128,7 +140,7 @@ body{
     <!-- CONVERSA -->
     <div class="btn-small" onclick="abrirChat()">
       <img src="chat.png" alt="Chat">
-      <span>Conversa</span>
+      <span>Conversar agora</span>
     </div>
 
     <div class="divider"></div>
@@ -136,7 +148,7 @@ body{
     <!-- CARRINHO -->
     <div class="btn-small" onclick="addCarrinho()">
       <img src="cart.png" alt="Carrinho">
-      <span>Carrinho</span>
+      <span>Adicionar ao carrinho</span>
     </div>
 
   </div>
