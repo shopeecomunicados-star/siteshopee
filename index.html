@@ -33,7 +33,16 @@ body{
 .verMaisBtn .seta{font-size:10px;transition:transform .2s}
 .verMaisBtn.aberta .seta{transform:rotate(180deg)}
 .modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none}
-.modal-content{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:12px 12px 0 0;animation:slideUp .25s ease}
+.modal-content{
+  position:absolute;
+  bottom:56px; /* ALTURA DA BARRA FIXA */
+  left:0;
+  right:0;
+  background:#fff;
+  border-radius:12px 12px 0 0;
+  animation:slideUp .25s ease;
+}
+
 .modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-size:16px;font-weight:500}
 .modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#212121}
 .modal-body{padding:0 16px 16px;font-size:14px}
