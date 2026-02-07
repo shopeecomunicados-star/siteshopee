@@ -52,10 +52,93 @@ body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#212121}
   border-radius:6px;
 }
 
+  /* ===== BARRA FIXA SHOPEE ===== */
+.bottom-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:56px;
+  background:#fff;
+  display:flex;
+  z-index:3000;
+  border-top:1px solid #e0e0e0;
+  font-family:Roboto, sans-serif;
+}
+
+.bottom-left{
+  flex:1;
+  display:flex;
+}
+
+.bottom-left .btn-small{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  color:#ee4d2d;
+  cursor:pointer;
+}
+
+.bottom-left .divider{
+  width:1px;
+  background:#e0e0e0;
+}
+
+.bottom-left img{
+  width:20px;
+  height:20px;
+  margin-bottom:2px;
+}
+
+.bottom-buy{
+  flex:1;
+  background:#ee4d2d;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+  
 </style>
 </head>
 <div class="lightbox" id="lightbox" onclick="fecharLightbox()">
   <img id="lightboxImg">
+</div>
+
+ <!-- BARRA FIXA INFERIOR (SHOPEE STYLE) -->
+<div class="bottom-bar">
+
+  <!-- METADE ESQUERDA -->
+  <div class="bottom-left">
+
+    <!-- CONVERSA -->
+    <div class="btn-small" onclick="abrirChat()">
+      <img src="chat.png" alt="Chat">
+      <span>Conversa</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CARRINHO -->
+    <div class="btn-small" onclick="addCarrinho()">
+      <img src="cart.png" alt="Carrinho">
+      <span>Carrinho</span>
+    </div>
+
+  </div>
+
+  <!-- METADE DIREITA -->
+  <div class="bottom-buy" onclick="comprarAgora()">
+    Compre agora
+  </div>
+
 </div>
 
   <body>
@@ -301,6 +384,18 @@ function abrirLightbox(src){
 function fecharLightbox(){
   document.getElementById('lightbox').style.display = 'none';
   document.body.style.overflow = '';
+}
+
+  function abrirChat(){
+  alert('Abrir conversa com o vendedor');
+}
+
+function addCarrinho(){
+  alert('Produto adicionado ao carrinho');
+}
+
+function comprarAgora(){
+  alert('Redirecionar para pagamento');
 }
 
 </script>
