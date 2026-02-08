@@ -139,7 +139,54 @@ body{
   cursor:pointer;
 }
 
-  
+ /* ===== OFERTA RELÂMPAGO SHOPEE ===== */
+.flash-sale{
+  width:100%;
+  background:#ee4d2d; /* laranja Shopee */
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 12px;
+  gap:12px;
+}
+
+.flash-left{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+
+.flash-title{
+  color:#fff;
+  font-size:15px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.flash-sub{
+  color:#fff;
+  font-size:11px;
+  font-weight:400;
+  margin-top:2px;
+}
+
+.flash-timer{
+  background:#000;
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  padding:6px 10px;
+  border-radius:4px;
+  display:flex;
+  gap:4px;
+  align-items:center;
+  white-space:nowrap;
+}
+
+.flash-timer span{
+  min-width:18px;
+  text-align:center;
+} 
 </style>
 </head>
   <body>
@@ -192,6 +239,18 @@ body{
 </div>
 
 <div class="thumbs" id="thumbs"></div>
+
+    <!-- OFERTA RELÂMPAGO -->
+<div class="flash-sale">
+  <div class="flash-left">
+    <span class="flash-title">OFERTAS RE⚡️ÁMPAGO</span>
+    <span class="flash-sub">TERMINA EM</span>
+  </div>
+
+  <div class="flash-timer" id="flashTimer">
+    <span>00</span>:<span>00</span>:<span>00</span>
+  </div>
+</div>
 
 <img class="preco-img" src="preco.jpg" alt="Preço">
 <div class="faixa"></div>
@@ -434,7 +493,28 @@ function comprarAgora(){
   window.location.href = "https://seguro.pague.click/api/public/shopify?product=1899515628127&store=18995";
 }
 
+/* ===== TIMER OFERTA RELÂMPAGO ===== */
+(function(){
+  // DEFINA A DURAÇÃO DA OFERTA (em segundos)
+  let tempo = 3 * 60 * 60; // 3 horas
 
+  const timerEl = document.getElementById('flashTimer');
+  if(!timerEl) return;
+
+  function atualizar(){
+    const h = String(Math.floor(tempo / 3600)).padStart(2,'0');
+    const m = String(Math.floor((tempo % 3600) / 60)).padStart(2,'0');
+    const s = String(tempo % 60).padStart(2,'0');
+
+    timerEl.innerHTML = `<span>${h}</span>:<span>${m}</span>:<span>${s}</span>`;
+
+    if(tempo > 0) tempo--;
+  }
+
+  atualizar();
+  setInterval(atualizar, 1000);
+})();
+  
 </script>
 
 </body>
