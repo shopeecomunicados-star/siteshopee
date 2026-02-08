@@ -139,54 +139,54 @@ body{
   cursor:pointer;
 }
 
- /* ===== OFERTA RELÂMPAGO SHOPEE ===== */
+/* ===== OFERTA RELÂMPAGO SHOPEE ===== */
 .flash-sale{
   width:100%;
   background:#ee4d2d; /* laranja Shopee */
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  gap:10px;                 /* espaço ENTRE textos */
   padding:10px 12px;
-  gap:12px;
-}
-
-.flash-left{
-  display:flex;
-  flex-direction:column;
-  line-height:1.1;
+  overflow:hidden;
 }
 
 .flash-title{
   color:#fff;
-  font-size:15px;
+  font-size:14px;           /* destaque maior */
   font-weight:700;
   white-space:nowrap;
 }
 
 .flash-sub{
   color:#fff;
-  font-size:11px;
+  font-size:12px;           /* menor que o título */
   font-weight:400;
-  margin-top:2px;
+  white-space:nowrap;
 }
 
 .flash-timer{
+  display:flex;
+  align-items:center;
+  margin-left:auto;         /* empurra timer para direita */
+}
+
+.flash-timer .box{
   background:#000;
   color:#fff;
   font-size:14px;
   font-weight:600;
-  padding:6px 10px;
+  padding:6px 8px;
   border-radius:4px;
-  display:flex;
-  gap:4px;
-  align-items:center;
-  white-space:nowrap;
+  min-width:26px;
+  text-align:center;
 }
 
-.flash-timer span{
-  min-width:18px;
-  text-align:center;
-} 
+.flash-timer .sep{
+  color:#fff;
+  font-size:14px;
+  margin:0 6px;             /* SEPARAÇÃO entre os quadrados */
+}
+  
 </style>
 </head>
   <body>
@@ -242,13 +242,15 @@ body{
 
     <!-- OFERTA RELÂMPAGO -->
 <div class="flash-sale">
-  <div class="flash-left">
-    <span class="flash-title">OFERTAS RE⚡️ÁMPAGO</span>
-    <span class="flash-sub">TERMINA EM</span>
-  </div>
+  <span class="flash-title">OFERTAS RE⚡️ÁMPAGO</span>
+  <span class="flash-sub">TERMINA EM</span>
 
   <div class="flash-timer" id="flashTimer">
-    <span>00</span>:<span>00</span>:<span>00</span>
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
   </div>
 </div>
 
@@ -495,7 +497,6 @@ function comprarAgora(){
 
 /* ===== TIMER OFERTA RELÂMPAGO ===== */
 (function(){
-  // DEFINA A DURAÇÃO DA OFERTA (em segundos)
   let tempo = 3 * 60 * 60; // 3 horas
 
   const timerEl = document.getElementById('flashTimer');
@@ -506,7 +507,10 @@ function comprarAgora(){
     const m = String(Math.floor((tempo % 3600) / 60)).padStart(2,'0');
     const s = String(tempo % 60).padStart(2,'0');
 
-    timerEl.innerHTML = `<span>${h}</span>:<span>${m}</span>:<span>${s}</span>`;
+    const boxes = timerEl.querySelectorAll('.box');
+    boxes[0].textContent = h;
+    boxes[1].textContent = m;
+    boxes[2].textContent = s;
 
     if(tempo > 0) tempo--;
   }
