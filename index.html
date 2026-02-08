@@ -18,7 +18,14 @@ body{
 .track{display:flex;transition:transform .32s ease-out}
 .slide{flex:0 0 100%;width:100%;height:50vh;background:center/cover no-repeat #e0e0e0}
 .thumbs{display:flex;justify-content:center;gap:6px;padding:8px 4px 0;background:#fff}
-.thumb{flex:0 0 17.5%;aspect-ratio:1/1;background:center/cover;border:2px solid transparent;cursor:pointer}
+.thumb{
+  flex:0 0 15%;
+  aspect-ratio:1/1;
+  background:center/cover;
+  border:2px solid transparent;
+  cursor:pointer;
+}
+
 .thumb.active{border-color:#000}
 .faixa{height:9px;background:#d0d0d0}
 .preco-img,.loja-img{display:block}
@@ -139,6 +146,114 @@ body{
   cursor:pointer;
 }
 
+/* ===== OFERTA RELÂMPAGO SHOPEE (AJUSTE FINAL) ===== */
+.flash-sale{
+  width:100%;
+  max-width:100%;
+  background:#ee4d2d;
+  display:flex;
+  align-items:center;
+  padding:8px 10px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.flash-title{
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+  margin-right:10px;     /* espaço após OFERTAS */
+}
+
+.flash-sub{
+  color:#fff;
+  font-size:11px;
+  font-weight:400;
+  white-space:nowrap;
+  margin-right:6px;      /* MAIS PRÓXIMO DO TIMER */
+}
+
+.flash-timer{
+  display:flex;
+  align-items:center;
+  margin-left:0;         /* remove afastamento extra */
+  flex-shrink:0;
+}
+
+.flash-timer .box{
+  background:#000;
+  color:#fff;
+  font-size:13px;
+  font-weight:600;
+  padding:5px 6px;
+  border-radius:4px;
+  min-width:24px;
+  text-align:center;
+}
+
+.flash-timer .sep{
+  color:#fff;
+  font-size:13px;
+  margin:0 4px;
+}
+
+.video-slide{
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.video-slide{
+  position:relative;
+}
+
+.video-slide video{
+  width:100%;
+  height:100%;
+}
+
+
+  
+
+
+.video-slide::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  pointer-events:none;
+}
+
+  /* PLAY OVERLAY NA MINIATURA DO VÍDEO */
+.thumb.video-thumb {
+  position: relative;
+}
+
+.thumb.video-thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  border-radius: inherit;
+}
+
+.thumb.video-thumb::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-45%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid #fff;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+
   
 </style>
 </head>
@@ -177,21 +292,49 @@ body{
 
 </div>
 
-  <body>
+  
 
 <img class="topo" src="topo.jpg" alt="Topo">
 
 <div class="carousel" id="c">
   <div class="track" id="t">
-    <div class="slide" style="background-image:url(1.jpg)"></div>
-    <div class="slide" style="background-image:url(2.jpg)"></div>
-    <div class="slide" style="background-image:url(3.jpg)"></div>
-    <div class="slide" style="background-image:url(4.jpg)"></div>
-    <div class="slide" style="background-image:url(5.jpg)"></div>
+  <div class="slide" style="background-image:url(1.jpg)"></div>
+
+  <!-- VÍDEO -->
+  <div class="slide video-slide">
+    <video
+      id="carouselVideo"
+      src="video.mp4"
+      poster="1.jpg"
+      controls
+      playsinline
+      preload="metadata"
+      style="width:100%;height:100%;object-fit:cover">
+    </video>
   </div>
+
+  <div class="slide" style="background-image:url(2.jpg)"></div>
+  <div class="slide" style="background-image:url(3.jpg)"></div>
+  <div class="slide" style="background-image:url(4.jpg)"></div>
+  <div class="slide" style="background-image:url(5.jpg)"></div>
 </div>
 
+
 <div class="thumbs" id="thumbs"></div>
+
+    <!-- OFERTA RELÂMPAGO -->
+<div class="flash-sale">
+  <span class="flash-title">OFERTAS RE⚡️ÁMPAGO</span>
+  <span class="flash-sub">TERMINA EM</span>
+
+  <div class="flash-timer" id="flashTimer">
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+  </div>
+</div>
 
 <img class="preco-img" src="preco.jpg" alt="Preço">
 <div class="faixa"></div>
@@ -213,50 +356,59 @@ body{
   <div class="linha"></div>
   <div class="desc-wrapper">
     <div class="desc-text" id="descResumo">
-      AIRSOFT BERETTA KL-92 SILVER GBB 6MM CB622<br>
-      A Pistola Airsoft KL-92, inspirada na clássica pistola italiana Beretta M92. Pistola cromada com detalhes em preto e alimentação por Green Gás. Tem excelente desempenho, chegando a 310 FPS* em média por disparo.
+  REVÓLVER ROSSI W702S CO2 4,5MM NIQUELADO 6"<br>
+  Revólver de pressão CO2 com acabamento niquelado (cromado), calibre 4,5mm, cano de 6 polegadas e alto nível de realismo. Ideal para tiro esportivo, lazer ou coleção.
+</div>
+</div>
+
+<div id="descCompleta" style="display:none">
+  <div class="desc-wrapper">
+    <div class="desc-text">
+      <strong>Descrição:</strong><br>
+      O Revólver de Pressão CO2 Rossi W702S é fabricado em metal com acabamento niquelado, oferecendo excelente realismo, ótimo peso e empunhadura anatômica que imita madeira. Possui cano de 6 polegadas, proporcionando maior precisão nos disparos. O cilindro de CO2 12g fica alojado na empunhadura, com fácil acesso, e sua autonomia chega a até 80 disparos por cápsula.<br><br>
+
+      <strong>Características Técnicas:</strong><br>
+      - Tipo de ação: CO2<br>
+      - Marca: Wingun / Rossi<br>
+      - Calibre: 4,5mm (.177)<br>
+      - Modo de disparo: Repetição manual<br>
+      - Engatilhamento: Dupla ação (simples e dupla)<br>
+      - Munição utilizada: Esferas de aço 4,5mm<br>
+      - Velocidade máxima: 130 m/s (426 FPS)<br>
+      - Energia: 3,0 Joules<br>
+      - Peso do produto: 1200g<br>
+      - Comprimento total: 300mm<br>
+      - Material: Metal / Polímero<br>
+      - Comprimento do cano: 120mm<br>
+      - Capacidade: 6 tiros<br>
+      - Trava de segurança: Manual<br>
+      - Alça de mira: Regulável<br>
+      - Massa de mira: Fixa<br>
+      - Trilho: Picatinny 22mm<br>
+      - Autonomia por cápsula CO2: até 80 disparos<br><br>
+
+      <strong>Indicação de Uso:</strong><br>
+      - Tiro esportivo<br>
+      - Lazer<br>
+      - Colecionismo<br><br>
+
+      <strong>Itens Inclusos:</strong><br>
+      - 01 Revólver Rossi W702S CO2 4,5mm<br>
+      - 06 Cartuchos<br>
+      - 02 Trilhos 22mm<br>
+      - 01 Manual<br><br>
+
+      <strong>Informações Importantes:</strong><br>
+      - Produto destinado a maiores de 18 anos<br>
+      - Não necessita CR para compra<br>
+      - Transporte deve ser feito desmuniciado, em case ou caixa, com nota fiscal<br>
+      - Garantia: 3 meses pelo fabricante<br><br>
+
+      Imagens meramente ilustrativas.
     </div>
   </div>
-  <div id="descCompleta" style="display:none">
-    <div class="desc-wrapper">
-      <div class="desc-text">
-        <strong>Especificações:</strong><br>
-        - Marca: Rossi<br>
-        - Modo de disparo: Automático e Semiautomático<br>
-        - Engatilhamento: Dupla Ação (Simples e Dupla)<br>
-        - Munição utilizada - Esferas Plásticas<br>
-        - Velocidade máxima (m/s) - 95 M/S<br>
-        - Peso munição referência velocidade (g) - 0,20g<br>
-        - Energia (joule) - 0,9 Joule<br>
-        - Peso do produto - 835g<br>
-        - Comprimento do produto - 235mm<br>
-        - Material do produto - Metal/Polímero<br>
-        - Cano (comprimento) - 115mm<br>
-        - Cano (acabamento) - Metal<br>
-        - Capacidade de munição - 22<br>
-        - Trava de segurança - Manual<br>
-        - Alça de mira - Fixa<br>
-        - Fibra ótica - Não possui<br>
-        - Massa de mira - Fixa<br>
-        - Trilho (tipo) - Picatinny<br>
-        - Trilho (tamanho) - 22mm<br>
-        - Blowback - Possui<br>
-        - Ferrolho - Móvel<br>
-        - Hop up - Regulável<br>
-        - Hop up (material) - Metal<br>
-        - Diâmetro interno do cano - 6,08mm<br>
-        - Cor do item - Prata e Preto<br>
-        - Ponteira (cor) - Vermelha<br>
-        - Ponteira (material) - Metal<br>
-        - Ponteira (rosca) - 14mm<br>
-        - Velocidade máxima (fps) - 311FPS<br>
-        - Peso munição referência velocidade (grain) - 3,08Grain<br><br>
-        <strong>Serve para:</strong><br>
-        - Airsoft / Colecionismo / Treino tático<br><br>
-        <strong>Itens Inclusos:</strong><br>
-        - 01un Pistola KL-92 Silver<br>
-        Imagens meramente ilustrativas.
-      </div>
+</div>
+
     </div>
   </div>
   <div class="verMaisCenter">
@@ -309,15 +461,64 @@ btn.addEventListener('click', () => {
 
 /* ---------- AVALIAÇÕES ---------- */
 const dados = [
-  {nome:'Carlos S.', foto:'perfil1.jpg', produto:'dep1.jpg', txt:'Chegou rápido e o blowback é muito realista! Já testei no campo e os 311 fps se confirmam.', curtidas:12},
-  {nome:'Lucas M.', foto:'perfil2.jpg', produto:'dep2.jpg', txt:'Acabamento perfeito, peso idêntico à original. Hop-up regulável é um diferencial.', curtidas:8},
-  {nome:'Marcos R.', foto:'perfil3.jpg', produto:'dep3.jpg', txt:'Cromado lindo, não riscou com facilidade. Capacidade de 22 esferas ajuda bastante.', curtidas:15},
-  {nome:'Rafael A.', foto:'perfil4.jpg', produto:'dep4.jpg', txt:'Sistema de gás green funciona sem vazamento. Trava de segurança firme, recomendo!', curtidas:9},
-  {nome:'Henrique P.', foto:'perfil5.jpg', produto:'dep5.jpg', txt:'Trilho 22mm deu pra colocar laser direto. Ferrolho móvel deixa a experiência mais real.', curtidas:21},
-  {nome:'Juliano K.', foto:'perfil6.jpg', produto:'dep6.jpg', txt:'Ponteira 14mm roscou fácil, já coloquei silenciador. Mira fixa ajuda na precisão.', curtidas:7},
-  {nome:'Gabriel T.', foto:'perfil7.jpg', produto:'dep7.jpg', txt:'Cano interno 6,08mm agrupou bem com 0,20g. Energia 0,9J cumpre regra do campo.', curtidas:18},
-  {nome:'Bruno L.', foto:'perfil8.jpg', produto:'dep8.jpg', txt:'Material metal/polímero equilibra peso e resistência. Já caiu no chão e não quebrou.', curtidas:11}
+  {
+    nome:'Carlos S.',
+    foto:'perfil1.jpg',
+    produto:'dep1.jpg',
+    txt:'Revólver muito bem construído, peso realista e disparos consistentes. Ótimo para lazer e treino.',
+    curtidas:14
+  },
+  {
+    nome:'Lucas M.',
+    foto:'perfil2.jpg',
+    produto:'dep2.jpg',
+    txt:'Acabamento niquelado é lindo demais. Empunhadura imita madeira e encaixa perfeitamente na mão.',
+    curtidas:10
+  },
+  {
+    nome:'Marcos R.',
+    foto:'perfil3.jpg',
+    produto:'dep3.jpg',
+    txt:'Cano de 6 polegadas realmente melhora a precisão. Agrupamento excelente para CO2 4,5mm.',
+    curtidas:17
+  },
+  {
+    nome:'Rafael A.',
+    foto:'perfil4.jpg',
+    produto:'dep4.jpg',
+    txt:'Autonomia muito boa, consegui quase 80 tiros com um cilindro de CO2. Funcionamento suave.',
+    curtidas:12
+  },
+  {
+    nome:'Henrique P.',
+    foto:'perfil5.jpg',
+    produto:'dep5.jpg',
+    txt:'Sistema de dupla ação funciona perfeitamente. Dá pra atirar rápido ou com mais controle.',
+    curtidas:20
+  },
+  {
+    nome:'Juliano K.',
+    foto:'perfil6.jpg',
+    produto:'dep6.jpg',
+    txt:'Trilho 22mm foi um diferencial, instalei acessório sem dificuldade. Produto bem completo.',
+    curtidas:9
+  },
+  {
+    nome:'Gabriel T.',
+    foto:'perfil7.jpg',
+    produto:'dep7.jpg',
+    txt:'Potência na medida certa, 3 joules bem aproveitados. Ótimo para tiro esportivo recreativo.',
+    curtidas:19
+  },
+  {
+    nome:'Bruno L.',
+    foto:'perfil8.jpg',
+    produto:'dep8.jpg',
+    txt:'Construção robusta em metal, passa muita sensação de realismo. Excelente custo-benefício.',
+    curtidas:13
+  }
 ];
+
 
 function estrelas(){ return `<span style="color:#ffa500">★★★★★</span>`; }
 
@@ -359,48 +560,114 @@ dados.forEach((d,i)=>{
   const c=document.getElementById('c');
   const t=document.getElementById('t');
   const slides=[...t.children];
+  const video = document.getElementById('carouselVideo');
+  let videoPlaying = false;
+
+if (video) {
+  video.addEventListener('play', () => {
+    videoPlaying = true;
+  });
+
+  video.addEventListener('pause', () => {
+    videoPlaying = false;
+  });
+
+  video.addEventListener('ended', () => {
+    videoPlaying = false;
+  });
+}
+
+
+  
+
+
+
   const total=slides.length;
   let idx=0;
   const thumbsDiv=document.getElementById('thumbs');
-  slides.forEach((s,i)=>{
-    const thumb=document.createElement('div');
-    thumb.className='thumb'+(i===0?' active':'');
-    thumb.style.backgroundImage=s.style.backgroundImage;
-    thumb.addEventListener('click',()=>move(i));
-    thumbsDiv.appendChild(thumb);
-  });
-  const thumbs=[...thumbsDiv.children];
-  function move(to){
-    t.style.transform=`translateX(${-to*100}%)`;
-    thumbs.forEach((th,i)=>th.classList.toggle('active',i===to));
-    idx=to;
+  slides.forEach((s, i) => {
+  const thumb = document.createElement('div');
+  thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+
+  // 👉 miniatura do vídeo usa imagem 1
+  if (s.classList.contains('video-slide')) {
+    thumb.style.backgroundImage = 'url(1.jpg)';
+    thumb.classList.add('video-thumb'); // 👈 AQUI
+  } else {
+    thumb.style.backgroundImage = s.style.backgroundImage;
   }
-  let startX=0,currentX=0,dragging=false;
-  c.addEventListener('touchstart',e=>{
-    startX=e.touches[0].clientX;
-    dragging=true;
-    t.style.transition='none';
-  },{passive:false});
-  c.addEventListener('touchmove',e=>{
-    if(!dragging) return;
-    currentX=e.touches[0].clientX;
-    const diffX=startX-currentX;
-    let raw=-idx*100 - (diffX/window.innerWidth)*100;
-    raw=Math.max(raw,-(total-1)*100);
-    raw=Math.min(raw,0);
-    t.style.transform=`translateX(${raw}%)`;
-    e.preventDefault();
-  },{passive:false});
-  c.addEventListener('touchend',e=>{
-    if(!dragging) return;
-    dragging=false;
-    const diff=startX-currentX;
-    let next=idx;
-    if(Math.abs(diff)>50){
-      next=diff>0?Math.min(idx+1,total-1):Math.max(idx-1,0);
-    }
-    move(next);
-  });
+
+  thumb.addEventListener('click', () => move(i));
+  thumbsDiv.appendChild(thumb);
+});
+
+  const thumbs=[...thumbsDiv.children];
+ function move(to){
+  // pausa o vídeo ao sair dele
+  if (video && idx === 1 && to !== 1) {
+    video.pause();
+  }
+
+  t.style.transition = 'transform .32s ease-out';
+  t.style.transform = `translateX(${-to * 100}%)`;
+
+  thumbs.forEach((th, i) => th.classList.toggle('active', i === to));
+  idx = to;
+}
+
+
+ let startX = 0;
+let currentX = 0;
+let dragging = false;
+
+c.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  currentX = startX;
+  dragging = true;
+  t.style.transition = 'none';
+}, { passive: true });
+
+
+
+c.addEventListener('touchmove', e => {
+  if (!dragging) return;
+
+  currentX = e.touches[0].clientX;
+  const diffX = startX - currentX;
+
+  let raw = -idx * 100 - (diffX / window.innerWidth) * 100;
+  raw = Math.max(raw, -(total - 1) * 100);
+  raw = Math.min(raw, 0);
+
+  t.style.transform = `translateX(${raw}%)`;
+}, { passive: true });
+
+c.addEventListener('touchend', () => {
+  if (!dragging) return;
+  dragging = false;
+
+  const diff = startX - currentX;
+
+  // 👉 SE NÃO ARRASTOU, NÃO MUDA SLIDE
+  if (Math.abs(diff) < 10) {
+    t.style.transition = 'transform .2s ease-out';
+    t.style.transform = `translateX(${-idx * 100}%)`;
+    return;
+  }
+
+  let next = idx;
+
+  if (Math.abs(diff) > 50) {
+    next = diff > 0
+      ? Math.min(idx + 1, total - 1)
+      : Math.max(idx - 1, 0);
+  }
+
+  move(next);
+});
+
+
+
 
   const modal=document.getElementById('modal');
   const abrir=document.getElementById('abrirModal');
@@ -434,7 +701,30 @@ function comprarAgora(){
   window.location.href = "https://seguro.pague.click/api/public/shopify?product=1899515628127&store=18995";
 }
 
+/* ===== TIMER OFERTA RELÂMPAGO ===== */
+(function(){
+  let tempo = 3 * 60 * 60; // 3 horas
 
+  const timerEl = document.getElementById('flashTimer');
+  if(!timerEl) return;
+
+  function atualizar(){
+    const h = String(Math.floor(tempo / 3600)).padStart(2,'0');
+    const m = String(Math.floor((tempo % 3600) / 60)).padStart(2,'0');
+    const s = String(tempo % 60).padStart(2,'0');
+
+    const boxes = timerEl.querySelectorAll('.box');
+    boxes[0].textContent = h;
+    boxes[1].textContent = m;
+    boxes[2].textContent = s;
+
+    if(tempo > 0) tempo--;
+  }
+
+  atualizar();
+  setInterval(atualizar, 1000);
+})();
+  
 </script>
 
 </body>
