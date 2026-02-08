@@ -139,52 +139,57 @@ body{
   cursor:pointer;
 }
 
-/* ===== OFERTA RELÂMPAGO SHOPEE ===== */
+/* ===== OFERTA RELÂMPAGO SHOPEE (CORRIGIDO) ===== */
 .flash-sale{
   width:100%;
-  background:#ee4d2d; /* laranja Shopee */
+  max-width:100%;
+  background:#ee4d2d;
   display:flex;
   align-items:center;
-  gap:10px;                 /* espaço ENTRE textos */
-  padding:10px 12px;
-  overflow:hidden;
+  padding:8px 10px;
+  gap:8px;
+  box-sizing:border-box;
+  overflow:hidden;           /* impede estouro */
 }
 
 .flash-title{
   color:#fff;
-  font-size:14px;           /* destaque maior */
+  font-size:13px;            /* levemente menor */
   font-weight:700;
   white-space:nowrap;
+  flex-shrink:0;
 }
 
 .flash-sub{
   color:#fff;
-  font-size:12px;           /* menor que o título */
+  font-size:11px;
   font-weight:400;
   white-space:nowrap;
+  flex-shrink:0;
 }
 
 .flash-timer{
   display:flex;
   align-items:center;
-  margin-left:auto;         /* empurra timer para direita */
+  margin-left:auto;
+  flex-shrink:0;             /* NÃO deixa estourar */
 }
 
 .flash-timer .box{
   background:#000;
   color:#fff;
-  font-size:14px;
+  font-size:13px;
   font-weight:600;
-  padding:6px 8px;
+  padding:5px 6px;           /* MAIS COMPACTO */
   border-radius:4px;
-  min-width:26px;
+  min-width:24px;            /* reduzido */
   text-align:center;
 }
 
 .flash-timer .sep{
   color:#fff;
-  font-size:14px;
-  margin:0 6px;             /* SEPARAÇÃO entre os quadrados */
+  font-size:13px;
+  margin:0 4px;              /* separação menor */
 }
   
 </style>
