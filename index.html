@@ -461,33 +461,45 @@ dados.forEach((d,i)=>{
     thumbsDiv.appendChild(thumb);
   });
   const thumbs=[...thumbsDiv.children];
-  function move(to){
-  // pausa o vídeo sempre que sair do slide dele
-  if(video && idx === 1 && to !== 1){
+ function move(to){
+  // pausa o vídeo ao sair dele
+  if (video && idx === 1 && to !== 1) {
     video.pause();
   }
 
-  t.style.transform = `translateX(${-to*100}%)`;
-  thumbs.forEach((th,i)=>th.classList.toggle('active',i===to));
+  t.style.transition = 'transform .32s ease-out';
+  t.style.transform = `translateX(${-to * 100}%)`;
+
+  thumbs.forEach((th, i) => th.classList.toggle('active', i === to));
   idx = to;
 }
 
+
   let startX=0,currentX=0,dragging=false;
-  c.addEventListener('touchstart',e=>{
-    startX=e.touches[0].clientX;
-    dragging=true;
-    t.style.transition='none';
-  },{passive:false});
-  c.addEventListener('touchmove',e=>{
-    if(!dragging) return;
-    currentX=e.touches[0].clientX;
-    const diffX=startX-currentX;
-    let raw=-idx*100 - (diffX/window.innerWidth)*100;
-    raw=Math.max(raw,-(total-1)*100);
-    raw=Math.min(raw,0);
-    t.style.transform=`translateX(${raw}%)`;
-    e.preventDefault();
-  },{passive:false});
+  c.addEventListener('touchstart', e => {
+  // 👇 se tocou no vídeo, NÃO inicia swipe
+  if (e.target.closest('video')) return;
+
+  startX = e.touches[0].clientX;
+  dragging = true;
+  t.style.transition = 'none';
+}, { passive: false });
+
+  c.addEventListener('touchmove', e => {
+  if (!dragging) return;
+  if (e.target.closest('video')) return;
+
+  currentX = e.touches[0].clientX;
+  const diffX = startX - currentX;
+
+  let raw = -idx * 100 - (diffX / window.innerWidth) * 100;
+  raw = Math.max(raw, -(total - 1) * 100);
+  raw = Math.min(raw, 0);
+
+  t.style.transform = `translateX(${raw}%)`;
+  e.preventDefault();
+}, { passive: false });
+
   c.addEventListener('touchend',e=>{
     if(!dragging) return;
     dragging=false;
