@@ -526,6 +526,14 @@ c.addEventListener('touchend', () => {
   dragging = false;
 
   const diff = startX - currentX;
+
+  // 👉 SE NÃO ARRASTOU, NÃO MUDA SLIDE
+  if (Math.abs(diff) < 10) {
+    t.style.transition = 'transform .2s ease-out';
+    t.style.transform = `translateX(${-idx * 100}%)`;
+    return;
+  }
+
   let next = idx;
 
   if (Math.abs(diff) > 50) {
@@ -536,6 +544,7 @@ c.addEventListener('touchend', () => {
 
   move(next);
 });
+
 
 
 
