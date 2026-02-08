@@ -469,11 +469,22 @@ dados.forEach((d,i)=>{
   const t=document.getElementById('t');
   const slides=[...t.children];
   const video = document.getElementById('carouselVideo');
-  if (video) {
-  video.addEventListener('touchstart', e => {
-    e.stopPropagation();
+  let videoPlaying = false;
+
+if (video) {
+  video.addEventListener('play', () => {
+    videoPlaying = true;
+  });
+
+  video.addEventListener('pause', () => {
+    videoPlaying = false;
+  });
+
+  video.addEventListener('ended', () => {
+    videoPlaying = false;
   });
 }
+
 
   
 
@@ -509,11 +520,15 @@ let currentX = 0;
 let dragging = false;
 
 c.addEventListener('touchstart', e => {
+  // 👉 se o vídeo estiver tocando, NÃO inicia swipe
+  if (videoPlaying && idx === 1) return;
+
   startX = e.touches[0].clientX;
-  currentX = startX; // ✅ LINHA CRÍTICA
+  currentX = startX;
   dragging = true;
   t.style.transition = 'none';
 }, { passive: true });
+
 
 
 c.addEventListener('touchmove', e => {
