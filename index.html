@@ -190,6 +190,19 @@ body{
   font-size:13px;
   margin:0 4px;
 }
+
+.video-slide{
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.video-slide video{
+  width:100%;
+  height:100%;
+}
+
   
 </style>
 </head>
@@ -235,7 +248,18 @@ body{
 <div class="carousel" id="c">
   <div class="track" id="t">
     <div class="slide" style="background-image:url(1.jpg)"></div>
-    <div class="slide" style="background-image:url(2.jpg)"></div>
+    <!-- 2º item: VÍDEO -->
+  <div class="slide video-slide">
+    <video
+      id="carouselVideo"
+      src="video.mp4"
+      poster="1.jpg"
+      controls
+      playsinline
+      preload="metadata"
+      style="width:100%;height:100%;object-fit:cover">
+    </video>
+  </div>
     <div class="slide" style="background-image:url(3.jpg)"></div>
     <div class="slide" style="background-image:url(4.jpg)"></div>
     <div class="slide" style="background-image:url(5.jpg)"></div>
@@ -424,6 +448,8 @@ dados.forEach((d,i)=>{
   const c=document.getElementById('c');
   const t=document.getElementById('t');
   const slides=[...t.children];
+  const video = document.getElementById('carouselVideo');
+
   const total=slides.length;
   let idx=0;
   const thumbsDiv=document.getElementById('thumbs');
@@ -436,10 +462,16 @@ dados.forEach((d,i)=>{
   });
   const thumbs=[...thumbsDiv.children];
   function move(to){
-    t.style.transform=`translateX(${-to*100}%)`;
-    thumbs.forEach((th,i)=>th.classList.toggle('active',i===to));
-    idx=to;
+  // pausa o vídeo sempre que sair do slide dele
+  if(video && idx === 1 && to !== 1){
+    video.pause();
   }
+
+  t.style.transform = `translateX(${-to*100}%)`;
+  thumbs.forEach((th,i)=>th.classList.toggle('active',i===to));
+  idx = to;
+}
+
   let startX=0,currentX=0,dragging=false;
   c.addEventListener('touchstart',e=>{
     startX=e.touches[0].clientX;
