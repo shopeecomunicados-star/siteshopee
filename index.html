@@ -205,8 +205,9 @@ body{
 .video-slide video{
   width:100%;
   height:100%;
-  pointer-events:auto;
+  pointer-events:none; /* 👈 bloqueia toque por padrão */
 }
+
 
 .video-slide::after{
   content:"";
@@ -464,6 +465,21 @@ dados.forEach((d,i)=>{
   const t=document.getElementById('t');
   const slides=[...t.children];
   const video = document.getElementById('carouselVideo');
+  if (video) {
+  // quando der play, libera interação
+  video.addEventListener('play', () => {
+    video.style.pointerEvents = 'auto';
+  });
+
+  // quando pausar, volta a bloquear para swipe
+  video.addEventListener('pause', () => {
+    video.style.pointerEvents = 'none';
+  });
+
+  // estado inicial
+  video.style.pointerEvents = 'none';
+}
+
 
   const total=slides.length;
   let idx=0;
