@@ -228,6 +228,32 @@ body{
   pointer-events:none;
 }
 
+  /* PLAY OVERLAY NA MINIATURA DO VÍDEO */
+.thumb.video-thumb {
+  position: relative;
+}
+
+.thumb.video-thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  border-radius: inherit;
+}
+
+.thumb.video-thumb::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-45%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid #fff;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+
   
 </style>
 </head>
@@ -508,6 +534,7 @@ if (video) {
   // 👉 miniatura do vídeo usa imagem 1
   if (s.classList.contains('video-slide')) {
     thumb.style.backgroundImage = 'url(1.jpg)';
+    thumb.classList.add('video-thumb'); // 👈 AQUI
   } else {
     thumb.style.backgroundImage = s.style.backgroundImage;
   }
