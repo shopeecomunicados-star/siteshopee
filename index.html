@@ -469,6 +469,12 @@ dados.forEach((d,i)=>{
   const t=document.getElementById('t');
   const slides=[...t.children];
   const video = document.getElementById('carouselVideo');
+  if (video) {
+  video.addEventListener('touchstart', e => {
+    e.stopPropagation();
+  });
+}
+
   
 
 
@@ -504,9 +510,11 @@ let dragging = false;
 
 c.addEventListener('touchstart', e => {
   startX = e.touches[0].clientX;
+  currentX = startX; // ✅ LINHA CRÍTICA
   dragging = true;
   t.style.transition = 'none';
 }, { passive: true });
+
 
 c.addEventListener('touchmove', e => {
   if (!dragging) return;
