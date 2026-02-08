@@ -198,9 +198,24 @@ body{
   justify-content:center;
 }
 
+.video-slide{
+  position:relative;
+}
+
 .video-slide video{
   width:100%;
   height:100%;
+  pointer-events:auto;
+}
+
+.video-slide::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  pointer-events:none;
 }
 
   
@@ -475,19 +490,22 @@ dados.forEach((d,i)=>{
 }
 
 
-  let startX=0,currentX=0,dragging=false;
-  c.addEventListener('touchstart', e => {
-  // 👇 se tocou no vídeo, NÃO inicia swipe
-  if (e.target.closest('video')) return;
+ let startX = 0;
+let currentX = 0;
+let dragging = false;
+
+c.addEventListener('touchstart', e => {
+  // 👉 se o vídeo estiver TOCANDO, bloqueia swipe
+  if (video && !video.paused) return;
 
   startX = e.touches[0].clientX;
   dragging = true;
   t.style.transition = 'none';
 }, { passive: false });
 
-  c.addEventListener('touchmove', e => {
+c.addEventListener('touchmove', e => {
   if (!dragging) return;
-  if (e.target.closest('video')) return;
+  if (video && !video.paused) return;
 
   currentX = e.touches[0].clientX;
   const diffX = startX - currentX;
@@ -500,16 +518,22 @@ dados.forEach((d,i)=>{
   e.preventDefault();
 }, { passive: false });
 
-  c.addEventListener('touchend',e=>{
-    if(!dragging) return;
-    dragging=false;
-    const diff=startX-currentX;
-    let next=idx;
-    if(Math.abs(diff)>50){
-      next=diff>0?Math.min(idx+1,total-1):Math.max(idx-1,0);
-    }
-    move(next);
-  });
+c.addEventListener('touchend', () => {
+  if (!dragging) return;
+  dragging = false;
+
+  const diff = startX - currentX;
+  let next = idx;
+
+  if (Math.abs(diff) > 50) {
+    next = diff > 0
+      ? Math.min(idx + 1, total - 1)
+      : Math.max(idx - 1, 0);
+  }
+
+  move(next);
+});
+
 
   const modal=document.getElementById('modal');
   const abrir=document.getElementById('abrirModal');
