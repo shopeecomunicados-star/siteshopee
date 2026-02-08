@@ -254,6 +254,104 @@ body{
   border-bottom: 9px solid transparent;
 }
 
+
+/* ===== PREÇO SHOPEE HTML ===== */
+.shopee-price-card{
+  background:#fff;
+  font-family:Roboto, sans-serif;
+}
+
+.price-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px 6px;
+}
+
+.price-main{
+  color:#ee4d2d;
+  font-size:32px;
+  font-weight:700;
+}
+
+.price-old{
+  color:#9e9e9e;
+  text-decoration:line-through;
+  font-size:18px;
+}
+
+.price-off{
+  background:#ffece8;
+  color:#ee4d2d;
+  font-size:14px;
+  font-weight:600;
+  padding:4px 6px;
+  border-radius:4px;
+}
+
+.price-sub{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 16px 10px;
+  font-size:14px;
+}
+
+.sold{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.sold svg{
+  width:20px;
+  height:20px;
+  fill:none;
+  stroke:#999;
+  stroke-width:1.6;
+  cursor:pointer;
+}
+
+.sold svg.active{
+  fill:#ee4d2d;
+  stroke:#ee4d2d;
+}
+
+.price-line{
+  height:1px;
+  background:#e0e0e0;
+}
+
+.product-title{
+  padding:12px 16px;
+  font-size:15px;
+  line-height:1.4;
+}
+
+.tag-indicado{
+  background:#ee4d2d;
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+  padding:3px 6px;
+  border-radius:3px;
+  margin-right:6px;
+}
+
+.frete{
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#26aa99;
+  font-size:14px;
+}
+
+.frete svg{
+  width:22px;
+  height:22px;
+  stroke:currentColo
+
   
 </style>
 </head>
@@ -336,7 +434,65 @@ body{
   </div>
 </div>
 
-<img class="preco-img" src="preco.jpg" alt="Preço">
+<!-- ===== BLOCO PREÇO (HTML REAL - SHOPEE) ===== -->
+<div class="shopee-price-card">
+
+  <div class="price-top">
+    <div class="price-main">R$69,90</div>
+    <div class="price-old">R$200,00</div>
+    <div class="price-off">-65%</div>
+  </div>
+
+  <div class="price-sub">
+    <span class="installments">Em até 12x R$6,78 &gt;</span>
+
+    <span class="sold">
+      134 Vendido(s)
+      <svg id="heartPrice" viewBox="0 0 24 24">
+        <path d="M12 21s-7.5-4.6-9.5-8.7C1 9 3 6 6.5 6c2 0 3.2 1.1 3.5 2
+                 0.3-.9 1.5-2 3.5-2C17 6 19 9 21.5 12.3
+                 19.5 16.4 12 21 12 21z"/>
+      </svg>
+    </span>
+  </div>
+
+  <div class="price-line"></div>
+
+  <div class="product-title">
+    <span class="tag-indicado">Indicado</span>
+    Pistola Airsoft Beretta KL-92 Silver + Munições + Bag profissional
+  </div>
+
+  <div class="price-line"></div>
+
+  <div class="frete">
+    <svg viewBox="0 0 24 24">
+      <rect x="1" y="3" width="15" height="13"></rect>
+      <polygon points="16,8 20,8 23,11 23,16 16,16"></polygon>
+      <circle cx="5.5" cy="18" r="2"></circle>
+      <circle cx="18.5" cy="18" r="2"></circle>
+    </svg>
+    Frete grátis <span class="old">R$0,62</span> R$0,00 com cupom
+    <span class="arrow">&gt;</span>
+  </div>
+
+  <div class="price-line"></div>
+
+  <div class="row-link">
+    Opção de Envio
+    <span class="arrow">&gt;</span>
+  </div>
+
+  <div class="price-line"></div>
+
+  <div class="row-link">
+    SPArcelado: Parcele em até 12x
+    <span class="arrow">&gt;</span>
+  </div>
+
+</div>
+
+  
 <div class="faixa"></div>
 <img class="loja-img" src="loja.jpg" alt="Loja">
 <div class="faixa"></div>
@@ -666,6 +822,14 @@ function comprarAgora(){
   atualizar();
   setInterval(atualizar, 1000);
 })();
+
+const heart = document.getElementById('heartPrice');
+if(heart){
+  heart.addEventListener('click',()=>{
+    heart.classList.toggle('active');
+  });
+}
+
   
 </script>
 
