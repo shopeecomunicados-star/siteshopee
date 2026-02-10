@@ -254,11 +254,34 @@ body{
   border-bottom: 9px solid transparent;
 }
 
+/* ===== SPLASH SCREEN ===== */
+#splash{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+}
+
+#splash img{
+  width:180px;       /* ajuste se quiser */
+  max-width:80%;
+}
+
+
   
 </style>
 </head>
   <body>
 
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <img src="splash.png" alt="Carregando">
+</div>
+
+    
 <div class="lightbox" id="lightbox" onclick="fecharLightbox()">
   <img id="lightboxImg">
 </div>
@@ -724,6 +747,24 @@ function comprarAgora(){
   atualizar();
   setInterval(atualizar, 1000);
 })();
+
+<script>
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+
+  setTimeout(() => {
+    splash.style.opacity = '0';
+    splash.style.transition = 'opacity .4s ease';
+
+    setTimeout(() => {
+      splash.remove();
+    }, 400);
+
+  }, 3000); // 3 segundos
+});
+</script>
+
+
   
 </script>
 
