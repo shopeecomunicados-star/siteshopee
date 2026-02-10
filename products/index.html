@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Revólver de Pressão W702s CO2 4,5mm Full Metal Rossi </title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{width:100%;display:block}
+body{
+  font-family:'Roboto',sans-serif;
+  background:#f5f5f5;
+  color:#212121;
+  padding-bottom:72px;
+}
+.topo{width:100%;display:block}
+.carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
+.track{display:flex;transition:transform .32s ease-out}
+.slide{flex:0 0 100%;width:100%;height:50vh;background:center/cover no-repeat #e0e0e0}
+.thumbs{display:flex;justify-content:center;gap:6px;padding:8px 4px 0;background:#fff}
+.thumb{
+  flex:0 0 15%;
+  aspect-ratio:1/1;
+  background:center/cover;
+  border:2px solid transparent;
+  cursor:pointer;
+}
+
+.thumb.active{border-color:#000}
+.faixa{height:9px;background:#d0d0d0}
+.preco-img,.loja-img{display:block}
+.descricao-box{background:#fff}
+.desc-wrapper{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.desc-wrapper .titulo{font-size:14px;font-weight:500}
+.desc-wrapper .link{color:#757575;margin-left:auto;cursor:pointer}
+.linha{height:1px;background:#d0d0d0;margin:0}
+.desc-text{font-size:14px;line-height:1.45}
+.verMaisCenter{display:flex;justify-content:center;padding:8px 0}
+.verMaisBtn{background:none;border:none;color:#ff6600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.verMaisBtn .seta{font-size:10px;transition:transform .2s}
+.verMaisBtn.aberta .seta{transform:rotate(180deg)}
+.modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none}
+.modal-content{
+  position:absolute;
+  bottom:56px; /* ALTURA DA BARRA FIXA */
+  left:0;
+  right:0;
+  background:#fff;
+  border-radius:12px 12px 0 0;
+  animation:slideUp .25s ease;
+}
+
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-size:16px;font-weight:500}
+.modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#212121}
+.modal-body{padding:0 16px 16px;font-size:14px}
+.modal-body .item{display:flex;justify-content:space-between;padding:6px 0}
+.modal-footer{padding:0 16px 16px;display:flex;justify-content:center}
+.modal-footer .ok-btn{background:#EE4D2D;color:#fff;border:none;border-radius:4px;width:100%;max-width:320px;padding:12px 0;font-size:16px;font-weight:500;cursor:pointer}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+  .lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:6px;
+}
+
+  /* ===== BARRA FIXA SHOPEE ===== */
+.bottom-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:56px;
+  background:#fff;
+  display:flex;
+  z-index:3000;
+  border-top:1px solid #e0e0e0;
+  font-family:Roboto, sans-serif;
+}
+
+.bottom-left{
+  flex:1;
+  display:flex;
+}
+
+.bottom-left .btn-small{
+  flex:1;
+  display:flex;
+  flex-direction:column;     /* IMAGEM EM CIMA */
+  align-items:center;
+  justify-content:center;
+  gap:4px;                   /* espaço entre imagem e texto */
+  background:#26aa99;
+  color:#fff;
+  cursor:pointer;
+  height:56px;               /* ALTURA FIXA (importante) */
+  text-align:center;
+}
+
+
+
+.bottom-left .btn-small span{
+  font-size:11px;
+  white-space:nowrap;        /* NÃO QUEBRA */
+  line-height:1;
+}
+
+
+.bottom-left .btn-small img{
+  width: 85px !important;
+  height: 85px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;        /* evita distorção */
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+
+
+
+.bottom-left .divider{
+  width:1px;
+  background:#28796F;   /* COR EXATA PEDIDA */
+}
+
+
+.bottom-buy{
+  flex:1;
+  background:#ee4d2d;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+/* ===== OFERTA RELÂMPAGO SHOPEE (AJUSTE FINAL) ===== */
+.flash-sale{
+  width:100%;
+  max-width:100%;
+  background:#ee4d2d;
+  display:flex;
+  align-items:center;
+  padding:8px 10px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.flash-title{
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+  margin-right:10px;     /* espaço após OFERTAS */
+}
+
+.flash-sub{
+  color:#fff;
+  font-size:11px;
+  font-weight:400;
+  white-space:nowrap;
+  margin-right:6px;      /* MAIS PRÓXIMO DO TIMER */
+}
+
+.flash-timer{
+  display:flex;
+  align-items:center;
+  margin-left:0;         /* remove afastamento extra */
+  flex-shrink:0;
+}
+
+.flash-timer .box{
+  background:#000;
+  color:#fff;
+  font-size:13px;
+  font-weight:600;
+  padding:5px 6px;
+  border-radius:4px;
+  min-width:24px;
+  text-align:center;
+}
+
+.flash-timer .sep{
+  color:#fff;
+  font-size:13px;
+  margin:0 4px;
+}
+
+.video-slide{
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.video-slide{
+  position:relative;
+}
+
+.video-slide video{
+  width:100%;
+  height:100%;
+}
+
+
+  
+
+
+.video-slide::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  pointer-events:none;
+}
+
+  /* PLAY OVERLAY NA MINIATURA DO VÍDEO */
+.thumb.video-thumb {
+  position: relative;
+}
+
+.thumb.video-thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  border-radius: inherit;
+}
+
+.thumb.video-thumb::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-45%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid #fff;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+
+/* ===== SPLASH SCREEN ===== */
+#splash{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+}
+
+#splash img{
+  width:180px;       /* ajuste se quiser */
+  max-width:80%;
+}
+
+
+  
+</style>
+</head>
+  <body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <img src="splash.png" alt="Carregando">
+</div>
+
+    
+<div class="lightbox" id="lightbox" onclick="fecharLightbox()">
+  <img id="lightboxImg">
+</div>
+
+ <!-- BARRA FIXA INFERIOR (SHOPEE STYLE) -->
+<div class="bottom-bar">
+
+  <!-- METADE ESQUERDA -->
+  <div class="bottom-left">
+
+    <!-- CONVERSA -->
+    <div class="btn-small" onclick="abrirChat()">
+      <img src="chat.PNG" alt="Chat">
+      <span>Conversar agora</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CARRINHO -->
+    <div class="btn-small" onclick="addCarrinho()">
+      <img src="cart.PNG" alt="Carrinho">
+      <span>Adicionar ao carrinho</span>
+    </div>
+
+  </div>
+
+  <!-- METADE DIREITA -->
+  <div class="bottom-buy" onclick="comprarAgora()">
+    Compre agora
+  </div>
+
+</div>
+
+  
+
+<img class="topo" src="topo.jpg" alt="Topo">
+
+<div class="carousel" id="c">
+  <div class="track" id="t">
+  <div class="slide" style="background-image:url(1.jpg)"></div>
+
+  <!-- VÍDEO -->
+  <div class="slide video-slide">
+    <video
+      id="carouselVideo"
+      src="video.mp4"
+      poster="1.jpg"
+      controls
+      playsinline
+      preload="metadata"
+      style="width:100%;height:100%;object-fit:cover">
+    </video>
+  </div>
+
+  <div class="slide" style="background-image:url(2.jpg)"></div>
+  <div class="slide" style="background-image:url(3.jpg)"></div>
+  <div class="slide" style="background-image:url(4.jpg)"></div>
+  <div class="slide" style="background-image:url(5.jpg)"></div>
+</div>
+
+
+<div class="thumbs" id="thumbs"></div>
+
+    <!-- OFERTA RELÂMPAGO -->
+<div class="flash-sale">
+  <span class="flash-title">OFERTAS RE⚡️ÁMPAGO</span>
+  <span class="flash-sub">TERMINA EM</span>
+
+  <div class="flash-timer" id="flashTimer">
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+  </div>
+</div>
+
+<img class="preco-img" src="preco.jpg" alt="Preço">
+<div class="faixa"></div>
+<img class="loja-img" src="loja.jpg" alt="Loja">
+<div class="faixa"></div>
+
+<!-- BLOCO ESPECIFICAÇÕES + ESTOQUE/ENVIO -->
+<div class="descricao-box">
+  <div class="desc-wrapper">
+    <span class="titulo">Especificações</span>
+    <span class="link" id="abrirModal">Estoque, Envio de &gt;</span>
+  </div>
+  <div class="linha"></div>
+</div>
+
+<!-- DESCRIÇÃO -->
+<div class="descricao-box">
+  <div class="desc-wrapper"><span class="titulo">Descrição</span></div>
+  <div class="linha"></div>
+  <div class="desc-wrapper">
+    <div class="desc-text" id="descResumo">
+  REVÓLVER ROSSI W702S CO2 4,5MM NIQUELADO 6"<br>
+  Revólver de pressão CO2 com acabamento niquelado (cromado), calibre 4,5mm, cano de 6 polegadas e alto nível de realismo. Ideal para tiro esportivo, lazer ou coleção.
+</div>
+</div>
+
+<div id="descCompleta" style="display:none">
+  <div class="desc-wrapper">
+    <div class="desc-text">
+      <strong>Descrição:</strong><br>
+      O Revólver de Pressão CO2 Rossi W702S é fabricado em metal com acabamento niquelado, oferecendo excelente realismo, ótimo peso e empunhadura anatômica que imita madeira. Possui cano de 6 polegadas, proporcionando maior precisão nos disparos. O cilindro de CO2 12g fica alojado na empunhadura, com fácil acesso, e sua autonomia chega a até 80 disparos por cápsula.<br><br>
+
+      <strong>Características Técnicas:</strong><br>
+      - Tipo de ação: CO2<br>
+      - Marca: Wingun / Rossi<br>
+      - Calibre: 4,5mm (.177)<br>
+      - Modo de disparo: Repetição manual<br>
+      - Engatilhamento: Dupla ação (simples e dupla)<br>
+      - Munição utilizada: Esferas de aço 4,5mm<br>
+      - Velocidade máxima: 130 m/s (426 FPS)<br>
+      - Energia: 3,0 Joules<br>
+      - Peso do produto: 1200g<br>
+      - Comprimento total: 300mm<br>
+      - Material: Metal / Polímero<br>
+      - Comprimento do cano: 120mm<br>
+      - Capacidade: 6 tiros<br>
+      - Trava de segurança: Manual<br>
+      - Alça de mira: Regulável<br>
+      - Massa de mira: Fixa<br>
+      - Trilho: Picatinny 22mm<br>
+      - Autonomia por cápsula CO2: até 80 disparos<br><br>
+
+      <strong>Indicação de Uso:</strong><br>
+      - Tiro esportivo<br>
+      - Lazer<br>
+      - Colecionismo<br><br>
+
+      <strong>Itens Inclusos:</strong><br>
+      - 01 Revólver Rossi W702S CO2 4,5mm<br>
+      - 06 Cartuchos<br>
+      - 02 Trilhos 22mm<br>
+      - 01 Manual<br><br>
+
+      <strong>Informações Importantes:</strong><br>
+      - Produto destinado a maiores de 18 anos<br>
+      - Não necessita CR para compra<br>
+      - Transporte deve ser feito desmuniciado, em case ou caixa, com nota fiscal<br>
+      - Garantia: 3 meses pelo fabricante<br><br>
+
+      Imagens meramente ilustrativas.
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+  <div class="verMaisCenter">
+    <button id="btnVerMais" class="verMaisBtn">Ver mais <span class="seta">▼</span></button>
+  </div>
+</div>
+
+<div class="faixa"></div>
+
+<div class="descricao-box">
+  <div class="desc-wrapper" style="flex-direction:column;align-items:flex-start;gap:4px">
+    <span class="titulo">Avaliações do produto</span>
+    <div style="font-size:14px;display:flex;align-items:center;gap:6px">
+      <span style="color:#ffa500">★★★★★</span>
+      <span style="color:#ee4d2d;font-weight:500">(4.9/5.0)</span>
+    </div>
+  </div>
+  <div class="linha"></div>
+  <div id="avaliacoes"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Especificação</span>
+      <button class="close-btn" id="fecharModal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="item"><span>Estoque</span><span>100</span></div>
+      <div class="item"><span>Envio de</span><span>Guarujá</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="ok-btn" id="okBtn">Ok</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- DESCRIÇÃO EXPANDÍVEL ---------- */
+const btn = document.getElementById('btnVerMais');
+const extra = document.getElementById('descCompleta');
+let aberto = false;
+btn.addEventListener('click', () => {
+  aberto = !aberto;
+  extra.style.display = aberto ? 'block' : 'none';
+  btn.innerHTML = (aberto ? 'Ver menos' : 'Ver mais') + ' <span class="seta">▼</span>';
+  btn.classList.toggle('aberta', aberto);
+});
+
+/* ---------- AVALIAÇÕES ---------- */
+const dados = [
+  {
+    nome:'Carlos S.',
+    foto:'perfil1.jpg',
+    produto:'dep1.jpg',
+    txt:'Revólver muito bem construído, peso realista e disparos consistentes. Ótimo para lazer e treino.',
+    curtidas:14
+  },
+  {
+    nome:'Lucas M.',
+    foto:'perfil2.jpg',
+    produto:'dep2.jpg',
+    txt:'Acabamento niquelado é lindo demais. Empunhadura imita madeira e encaixa perfeitamente na mão.',
+    curtidas:10
+  },
+  {
+    nome:'Marcos R.',
+    foto:'perfil3.jpg',
+    produto:'dep3.jpg',
+    txt:'Cano de 6 polegadas realmente melhora a precisão. Agrupamento excelente para CO2 4,5mm.',
+    curtidas:17
+  },
+  {
+    nome:'Rafael A.',
+    foto:'perfil4.jpg',
+    produto:'dep4.jpg',
+    txt:'Autonomia muito boa, consegui quase 80 tiros com um cilindro de CO2. Funcionamento suave.',
+    curtidas:12
+  },
+  {
+    nome:'Henrique P.',
+    foto:'perfil5.jpg',
+    produto:'dep5.jpg',
+    txt:'Sistema de dupla ação funciona perfeitamente. Dá pra atirar rápido ou com mais controle.',
+    curtidas:20
+  },
+  {
+    nome:'Juliano K.',
+    foto:'perfil6.jpg',
+    produto:'dep6.jpg',
+    txt:'Trilho 22mm foi um diferencial, instalei acessório sem dificuldade. Produto bem completo.',
+    curtidas:9
+  },
+  {
+    nome:'Gabriel T.',
+    foto:'perfil7.jpg',
+    produto:'dep7.jpg',
+    txt:'Potência na medida certa, 3 joules bem aproveitados. Ótimo para tiro esportivo recreativo.',
+    curtidas:19
+  },
+  {
+    nome:'Bruno L.',
+    foto:'perfil8.jpg',
+    produto:'dep8.jpg',
+    txt:'Construção robusta em metal, passa muita sensação de realismo. Excelente custo-benefício.',
+    curtidas:13
+  }
+];
+
+
+function estrelas(){ return `<span style="color:#ffa500">★★★★★</span>`; }
+
+function curtidaBtn(id, qtd){
+  return `
+    <button onclick="curtir(this)"
+      style="background:none;border:none;color:#757575;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px">
+      <img src="like.png" style="width:12px;height:12px">
+      útil (${qtd})
+    </button>
+  `;
+}
+
+window.curtir = function(btn){
+  const n = parseInt(btn.textContent.match(/\d+/)[0]) + 1;
+  btn.innerHTML = `<img src="like.png" style="width:12px;height:12px"> útil (${n})`;
+  btn.style.color = '#ee4d2d';
+  btn.onclick = null;
+};
+
+const box = document.getElementById('avaliacoes');
+dados.forEach((d,i)=>{
+  box.innerHTML += `
+  <div style="padding:12px 16px;border-bottom:1px solid #e0e0e0">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="${d.foto}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">
+        <div style="flex:1;font-size:14px">${d.nome}<br>${estrelas()}</div>
+      </div>
+      ${curtidaBtn(i, d.curtidas)}
+    </div>
+    <div style="margin-top:6px;font-size:14px">${d.txt}</div>
+    <img src="${d.produto}" onclick="abrirLightbox(this.src)" style="width:72px;height:72px;object-fit:cover;border-radius:4px;margin-top:6px">
+  </div>`;
+});
+
+/* ---------- CARROSSEL + MODAL ---------- */
+(()=>{
+  const c=document.getElementById('c');
+  const t=document.getElementById('t');
+  const slides=[...t.children];
+  const video = document.getElementById('carouselVideo');
+  let videoPlaying = false;
+
+if (video) {
+  video.addEventListener('play', () => {
+    videoPlaying = true;
+  });
+
+  video.addEventListener('pause', () => {
+    videoPlaying = false;
+  });
+
+  video.addEventListener('ended', () => {
+    videoPlaying = false;
+  });
+}
+
+
+  
+
+
+
+  const total=slides.length;
+  let idx=0;
+  const thumbsDiv=document.getElementById('thumbs');
+  slides.forEach((s, i) => {
+  const thumb = document.createElement('div');
+  thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+
+  // 👉 miniatura do vídeo usa imagem 1
+  if (s.classList.contains('video-slide')) {
+    thumb.style.backgroundImage = 'url(1.jpg)';
+    thumb.classList.add('video-thumb'); // 👈 AQUI
+  } else {
+    thumb.style.backgroundImage = s.style.backgroundImage;
+  }
+
+  thumb.addEventListener('click', () => move(i));
+  thumbsDiv.appendChild(thumb);
+});
+
+  const thumbs=[...thumbsDiv.children];
+ function move(to){
+  // pausa o vídeo ao sair dele
+  if (video && idx === 1 && to !== 1) {
+    video.pause();
+  }
+
+  t.style.transition = 'transform .32s ease-out';
+  t.style.transform = `translateX(${-to * 100}%)`;
+
+  thumbs.forEach((th, i) => th.classList.toggle('active', i === to));
+  idx = to;
+}
+
+
+ let startX = 0;
+let currentX = 0;
+let dragging = false;
+
+c.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  currentX = startX;
+  dragging = true;
+  t.style.transition = 'none';
+}, { passive: true });
+
+
+
+c.addEventListener('touchmove', e => {
+  if (!dragging) return;
+
+  currentX = e.touches[0].clientX;
+  const diffX = startX - currentX;
+
+  let raw = -idx * 100 - (diffX / window.innerWidth) * 100;
+  raw = Math.max(raw, -(total - 1) * 100);
+  raw = Math.min(raw, 0);
+
+  t.style.transform = `translateX(${raw}%)`;
+}, { passive: true });
+
+c.addEventListener('touchend', () => {
+  if (!dragging) return;
+  dragging = false;
+
+  const diff = startX - currentX;
+
+  // 👉 SE NÃO ARRASTOU, NÃO MUDA SLIDE
+  if (Math.abs(diff) < 10) {
+    t.style.transition = 'transform .2s ease-out';
+    t.style.transform = `translateX(${-idx * 100}%)`;
+    return;
+  }
+
+  let next = idx;
+
+  if (Math.abs(diff) > 50) {
+    next = diff > 0
+      ? Math.min(idx + 1, total - 1)
+      : Math.max(idx - 1, 0);
+  }
+
+  move(next);
+});
+
+
+
+
+  const modal=document.getElementById('modal');
+  const abrir=document.getElementById('abrirModal');
+  const fechar=document.getElementById('fecharModal');
+  const okBtn=document.getElementById('okBtn');
+  abrir.addEventListener('click',()=>modal.style.display='flex');
+  fechar.addEventListener('click',()=>modal.style.display='none');
+  okBtn.addEventListener('click',()=>modal.style.display='none');
+  modal.addEventListener('click',e=>{if(e.target===modal) modal.style.display='none'});
+})();
+
+function abrirLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function fecharLightbox(){
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+  function abrirChat(){
+  window.location.href = "https://wa.me/+5514991741467";
+}
+
+function addCarrinho(){
+  window.location.href = "https://seguro.pague.click/api/public/shopify?product=1899599353864&store=18995";
+}
+
+function comprarAgora(){
+  window.location.href = "https://seguro.pague.click/api/public/shopify?product=1899599353864&store=18995";
+}
+
+/* ===== TIMER OFERTA RELÂMPAGO ===== */
+(function(){
+  let tempo = 3 * 60 * 60; // 3 horas
+
+  const timerEl = document.getElementById('flashTimer');
+  if(!timerEl) return;
+
+  function atualizar(){
+    const h = String(Math.floor(tempo / 3600)).padStart(2,'0');
+    const m = String(Math.floor((tempo % 3600) / 60)).padStart(2,'0');
+    const s = String(tempo % 60).padStart(2,'0');
+
+    const boxes = timerEl.querySelectorAll('.box');
+    boxes[0].textContent = h;
+    boxes[1].textContent = m;
+    boxes[2].textContent = s;
+
+    if(tempo > 0) tempo--;
+  }
+
+  atualizar();
+  setInterval(atualizar, 1000);
+})();
+
+
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+
+  setTimeout(() => {
+    splash.style.opacity = '0';
+    splash.style.transition = 'opacity .4s ease';
+
+    setTimeout(() => {
+      splash.remove();
+    }, 400);
+
+  }, 2000); // 2 segundos
+});
+
+
+
+
+
+
+  
+</script>
+
+</body>
+</html>
