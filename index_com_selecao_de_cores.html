@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Caneta Reparadora Automotiva 2 em 1 – Disfarce Pequenos Riscos e Renove o Visual do Seu Carro </title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{width:100%;display:block}
+body{
+  font-family:'Roboto',sans-serif;
+  background:#f5f5f5;
+  color:#212121;
+  padding-bottom:72px;
+}
+.topo{width:100%;display:block}
+.carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
+.track{display:flex;transition:transform .32s ease-out}
+.slide{flex:0 0 100%;width:100%;height:50vh;background:center/cover no-repeat #e0e0e0}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.thumbs{display:flex;justify-content:center;gap:6px;padding:8px 4px 0;background:#fff}
+.thumb{
+  flex:0 0 15%;
+  aspect-ratio:1/1;
+  background:center/cover;
+  border:2px solid transparent;
+  cursor:pointer;
+}
+
+.thumb.active{border-color:#000}
+.faixa{height:9px;background:#d0d0d0}
+.preco-img,.loja-img{display:block}
+.descricao-box{background:#fff}
+.desc-wrapper{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.desc-wrapper .titulo{font-size:14px;font-weight:500}
+.desc-wrapper .link{color:#757575;margin-left:auto;cursor:pointer}
+.linha{height:1px;background:#d0d0d0;margin:0}
+.desc-text{font-size:14px;line-height:1.45}
+.verMaisCenter{display:flex;justify-content:center;padding:8px 0}
+.verMaisBtn{background:none;border:none;color:#ff6600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.verMaisBtn .seta{font-size:10px;transition:transform .2s}
+.verMaisBtn.aberta .seta{transform:rotate(180deg)}
+.modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:none}
+.modal-content{
+  position:absolute;
+  bottom:56px; /* ALTURA DA BARRA FIXA */
+  left:0;
+  right:0;
+  background:#fff;
+  border-radius:12px 12px 0 0;
+  animation:slideUp .25s ease;
+}
+
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-size:16px;font-weight:500}
+.modal-header .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#212121}
+.modal-body{padding:0 16px 16px;font-size:14px}
+.modal-body .item{display:flex;justify-content:space-between;padding:6px 0}
+.modal-footer{padding:0 16px 16px;display:flex;justify-content:center}
+.modal-footer .ok-btn{background:#EE4D2D;color:#fff;border:none;border-radius:4px;width:100%;max-width:320px;padding:12px 0;font-size:16px;font-weight:500;cursor:pointer}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+  .lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:6px;
+}
+
+  /* ===== BARRA FIXA SHOPEE ===== */
+.bottom-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:56px;
+  background:#fff;
+  display:flex;
+  z-index:3000;
+  border-top:1px solid #e0e0e0;
+  font-family:Roboto, sans-serif;
+}
+
+.bottom-left{
+  flex:1;
+  display:flex;
+}
+
+.bottom-left .btn-small{
+  flex:1;
+  display:flex;
+  flex-direction:column;     /* IMAGEM EM CIMA */
+  align-items:center;
+  justify-content:center;
+  gap:4px;                   /* espaço entre imagem e texto */
+  background:#26aa99;
+  color:#fff;
+  cursor:pointer;
+  height:56px;               /* ALTURA FIXA (importante) */
+  text-align:center;
+}
+
+
+
+.bottom-left .btn-small span{
+  font-size:11px;
+  white-space:nowrap;        /* NÃO QUEBRA */
+  line-height:1;
+}
+
+
+.bottom-left .btn-small img{
+  width: 85px !important;
+  height: 85px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;        /* evita distorção */
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+
+
+
+.bottom-left .divider{
+  width:1px;
+  background:#28796F;   /* COR EXATA PEDIDA */
+}
+
+
+.bottom-buy{
+  flex:1;
+  background:#ee4d2d;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+/* ===== OFERTA RELÂMPAGO SHOPEE (AJUSTE FINAL) ===== */
+.flash-sale{
+  width:100%;
+  max-width:100%;
+  background:#ee4d2d;
+  display:flex;
+  align-items:center;
+  padding:8px 10px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.flash-title{
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+  margin-right:10px;     /* espaço após OFERTAS */
+}
+
+.flash-sub{
+  color:#fff;
+  font-size:11px;
+  font-weight:400;
+  white-space:nowrap;
+  margin-right:6px;      /* MAIS PRÓXIMO DO TIMER */
+}
+
+.flash-timer{
+  display:flex;
+  align-items:center;
+  margin-left:0;         /* remove afastamento extra */
+  flex-shrink:0;
+}
+
+.flash-timer .box{
+  background:#000;
+  color:#fff;
+  font-size:13px;
+  font-weight:600;
+  padding:5px 6px;
+  border-radius:4px;
+  min-width:24px;
+  text-align:center;
+}
+
+.flash-timer .sep{
+  color:#fff;
+  font-size:13px;
+  margin:0 4px;
+}
+
+/* ===== SELEÇÃO DE VARIAÇÃO / COR ===== */
+.variacoes-box{background:#fff;padding:16px 16px 14px;border-bottom:1px solid #e5e5e5}
+.variacoes-titulo{font-size:18px;font-weight:700;margin-bottom:14px}
+.variacoes-lista{display:flex;flex-wrap:wrap;gap:10px}
+.variacao-cor{width:calc(20% - 8px);min-width:58px;max-width:100px;min-height:91px;background:#fff;border:1px solid #ddd;border-radius:7px;padding:7px 4px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;color:#222;font-family:inherit}
+.variacao-cor .amostra-cor{width:43px;height:43px;border-radius:50%;border:1px solid #c8c8c8;display:block}
+.variacao-cor .nome-cor{font-size:11px;font-weight:700;text-align:center;line-height:1.15}
+.variacao-cor.selecionada{border:2px solid #ee4d2d;background:#fff8f6;padding:6px 3px 5px}
+.variacao-cor.selecionada .nome-cor{color:#ee4d2d}
+.variacao-aviso{display:none;color:#ee4d2d;font-size:13px;margin-top:12px;font-weight:500}
+.variacao-aviso.visivel{display:block}
+@media(max-width:360px){.variacao-cor{min-width:50px}.variacao-cor .amostra-cor{width:37px;height:37px}.variacao-cor .nome-cor{font-size:10px}}
+
+/* ===== SPLASH SCREEN ===== */
+#splash{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+}
+
+#splash img{
+  width:180px;       /* ajuste se quiser */
+  max-width:80%;
+}
+
+
+  
+</style>
+</head>
+  <body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <img src="splash.png" alt="Carregando">
+</div>
+
+    
+<div class="lightbox" id="lightbox" onclick="fecharLightbox()">
+  <img id="lightboxImg">
+</div>
+
+ <!-- BARRA FIXA INFERIOR (SHOPEE STYLE) -->
+<div class="bottom-bar">
+
+  <!-- METADE ESQUERDA -->
+  <div class="bottom-left">
+
+    <!-- CONVERSA -->
+    <div class="btn-small" onclick="abrirChat()">
+      <img src="chat.PNG" alt="Chat">
+      <span>Conversar agora</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CARRINHO -->
+    <div class="btn-small" onclick="addCarrinho()">
+      <img src="cart.PNG" alt="Carrinho">
+      <span>Adicionar ao carrinho</span>
+    </div>
+
+  </div>
+
+  <!-- METADE DIREITA -->
+  <div class="bottom-buy" onclick="comprarAgora()">
+    Compre agora
+  </div>
+
+</div>
+
+  
+
+<img class="topo" src="topo.jpg" alt="Topo">
+
+<div class="carousel" id="c">
+  <div class="track" id="t">
+  <div class="slide" style="background-image:url('./1.jpg')"><img src="./1.jpg" alt="Imagem 1" draggable="false"></div>
+  <div class="slide" style="background-image:url('./2.jpg')"><img src="./2.jpg" alt="Imagem 2" draggable="false"></div>
+  <div class="slide" style="background-image:url('./3.jpg')"><img src="./3.jpg" alt="Imagem 3" draggable="false"></div>
+  <div class="slide" style="background-image:url('./4.jpg')"><img src="./4.jpg" alt="Imagem 4" draggable="false"></div>
+  <div class="slide" style="background-image:url('./5.jpg')"><img src="./5.jpg" alt="Imagem 5" draggable="false"></div>
+  <div class="slide" style="background-image:url('./6.jpg')"><img src="./6.jpg" alt="Imagem 6" draggable="false"></div>
+</div>
+
+
+<div class="thumbs" id="thumbs"></div>
+
+    <!-- OFERTA RELÂMPAGO -->
+<div class="flash-sale">
+  <span class="flash-title">OFERTAS RE⚡️ÁMPAGO</span>
+  <span class="flash-sub">TERMINA EM</span>
+
+  <div class="flash-timer" id="flashTimer">
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+    <span class="sep">:</span>
+    <span class="box">00</span>
+  </div>
+</div>
+
+<!-- SELEÇÃO DE COR DO PRODUTO -->
+<section class="variacoes-box" aria-label="Selecione a cor do produto">
+  <div class="variacoes-titulo">Selecione a cor</div>
+  <div class="variacoes-lista">
+    <button type="button" class="variacao-cor" data-cor="Branco" aria-pressed="false">
+      <span class="amostra-cor" style="background:#fff"></span><span class="nome-cor">BRANCO</span>
+    </button>
+    <button type="button" class="variacao-cor" data-cor="Prata" aria-pressed="false">
+      <span class="amostra-cor" style="background:#c9cacc"></span><span class="nome-cor">PRATA</span>
+    </button>
+    <button type="button" class="variacao-cor" data-cor="Preto" aria-pressed="false">
+      <span class="amostra-cor" style="background:#151515;border-color:#151515"></span><span class="nome-cor">PRETO</span>
+    </button>
+    <button type="button" class="variacao-cor" data-cor="Cinza/Grafite" aria-pressed="false">
+      <span class="amostra-cor" style="background:#66686b;border-color:#66686b"></span><span class="nome-cor">CINZA/GRAFITE</span>
+    </button>
+    <button type="button" class="variacao-cor" data-cor="Vermelho" aria-pressed="false">
+      <span class="amostra-cor" style="background:#d92727;border-color:#d92727"></span><span class="nome-cor">VERMELHO</span>
+    </button>
+  </div>
+  <div class="variacao-aviso" id="variacaoAviso" role="alert">Selecione a variação do produto primeiro.</div>
+</section>
+
+<img class="preco-img" src="preco.JPEG" alt="Preço">
+<div class="faixa"></div>
+<img class="loja-img" src="loja.jpg" alt="Loja">
+<div class="faixa"></div>
+
+<!-- BLOCO ESPECIFICAÇÕES + ESTOQUE/ENVIO -->
+<div class="descricao-box">
+  <div class="desc-wrapper">
+    <span class="titulo">Especificações</span>
+    <span class="link" id="abrirModal">Estoque, Envio de &gt;</span>
+  </div>
+  <div class="linha"></div>
+</div>
+
+
+<!-- DESCRIÇÃO -->
+<div class="descricao-box">
+  <div class="desc-wrapper">
+    <span class="titulo">Descrição</span>
+  </div>
+
+  <div class="linha"></div>
+
+  <div class="desc-wrapper">
+    <div class="desc-text" id="descResumo">
+      🚗 PEQUENOS RETOQUES, MAIS CUIDADO COM SEU VEÍCULO<br><br>
+
+      Precisa retocar pequenos pontos da pintura?<br><br>
+
+      Conheça a Caneta Reparadora Automotiva 2 em 1: ponta fina e pincel no mesmo produto.<br><br>
+
+      ✍️ DOIS APLICADORES. VOCÊ ESCOLHE!<br><br>
+
+      1️⃣ PONTA FINA TIPO CANETA<br>
+      Puxe a tampa para usar.<br><br>
+
+      2️⃣ PINCEL INTEGRADO<br>
+      Desrosqueie a tampa para usar o pincel, semelhante ao aplicador de esmalte.
+    </div>
+  </div>
+
+  <div id="descCompleta" style="display:none">
+    <div class="desc-wrapper">
+      <div class="desc-text">
+        🚗 <strong>PEQUENOS RETOQUES, MAIS CUIDADO COM SEU VEÍCULO</strong><br><br>
+
+        Precisa retocar pequenos pontos da pintura?<br><br>
+
+        Conheça a Caneta Reparadora Automotiva 2 em 1: ponta fina e pincel no mesmo produto.<br><br>
+
+        ✍️ <strong>DOIS APLICADORES. VOCÊ ESCOLHE!</strong><br><br>
+
+        <strong>1️⃣ PONTA FINA TIPO CANETA</strong><br>
+        Puxe a tampa para usar.<br><br>
+
+        <strong>2️⃣ PINCEL INTEGRADO</strong><br>
+        Desrosqueie a tampa para usar o pincel, semelhante ao aplicador de esmalte.<br><br>
+
+        ✅ <strong>PRATICIDADE PARA RETOQUES PONTUAIS</strong><br><br>
+
+        Escolha o aplicador conforme o ponto que deseja retocar.<br><br>
+
+        As duas formas de aplicação ficam na mesma caneta.<br><br>
+
+        📦 <strong>O QUE VOCÊ RECEBE</strong><br><br>
+
+        1 unidade da caneta reparadora, na cor escolhida.<br><br>
+
+        As cores são opções de compra, não um kit.<br><br>
+
+        ⚠️ <strong>ATENÇÃO À TONALIDADE</strong><br><br>
+
+        O nome da cor não garante correspondência exata com a pintura do veículo.<br><br>
+
+        Leia e siga as instruções da embalagem antes de usar.<br><br>
+
+        🛒 <strong>ESCOLHA SUA COR</strong><br><br>
+
+        ⚫ Preto &nbsp;&nbsp; • &nbsp;&nbsp; Cinza &nbsp;&nbsp; • &nbsp;&nbsp; ⚪ Branco<br><br>
+
+        Confira a tonalidade, selecione a cor nas variações e adicione ao carrinho.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+  <div class="verMaisCenter">
+    <button id="btnVerMais" class="verMaisBtn">Ver mais <span class="seta">▼</span></button>
+  </div>
+</div>
+
+<div class="faixa"></div>
+
+<div class="descricao-box">
+  <div class="desc-wrapper" style="flex-direction:column;align-items:flex-start;gap:4px">
+    <span class="titulo">Avaliações do produto</span>
+    <div style="font-size:14px;display:flex;align-items:center;gap:6px">
+      <span style="color:#ffa500">★★★★★</span>
+      <span style="color:#ee4d2d;font-weight:500">(4.9/5.0)</span>
+    </div>
+  </div>
+  <div class="linha"></div>
+  <div id="avaliacoes"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Especificação</span>
+      <button class="close-btn" id="fecharModal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="item"><span>Estoque</span><span>100</span></div>
+      <div class="item"><span>Envio de</span><span>Guarujá</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="ok-btn" id="okBtn">Ok</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- DESCRIÇÃO EXPANDÍVEL ---------- */
+const btn = document.getElementById('btnVerMais');
+const extra = document.getElementById('descCompleta');
+let aberto = false;
+btn.addEventListener('click', () => {
+  aberto = !aberto;
+  extra.style.display = aberto ? 'block' : 'none';
+  btn.innerHTML = (aberto ? 'Ver menos' : 'Ver mais') + ' <span class="seta">▼</span>';
+  btn.classList.toggle('aberta', aberto);
+});
+
+/* ---------- AVALIAÇÕES ---------- */
+const dados = [
+  {
+    nome:'Carlos S.',
+    foto:'perfil1.jpg',
+    produto:'dep1.jpg',
+    txt:'Revólver muito bem construído, peso realista e disparos consistentes. Ótimo para lazer e treino.',
+    curtidas:14
+  },
+  {
+    nome:'Lucas M.',
+    foto:'perfil2.jpg',
+    produto:'dep2.jpg',
+    txt:'Acabamento niquelado é lindo demais. Empunhadura imita madeira e encaixa perfeitamente na mão.',
+    curtidas:10
+  },
+  {
+    nome:'Marcos R.',
+    foto:'perfil3.jpg',
+    produto:'dep3.jpg',
+    txt:'Cano de 6 polegadas realmente melhora a precisão. Agrupamento excelente para CO2 4,5mm.',
+    curtidas:17
+  },
+  {
+    nome:'Rafael A.',
+    foto:'perfil4.jpg',
+    produto:'dep4.jpg',
+    txt:'Autonomia muito boa, consegui quase 80 tiros com um cilindro de CO2. Funcionamento suave.',
+    curtidas:12
+  },
+  {
+    nome:'Henrique P.',
+    foto:'perfil5.jpg',
+    produto:'dep5.jpg',
+    txt:'Sistema de dupla ação funciona perfeitamente. Dá pra atirar rápido ou com mais controle.',
+    curtidas:20
+  },
+  {
+    nome:'Juliano K.',
+    foto:'perfil6.jpg',
+    produto:'dep6.jpg',
+    txt:'Trilho 22mm foi um diferencial, instalei acessório sem dificuldade. Produto bem completo.',
+    curtidas:9
+  },
+  {
+    nome:'Gabriel T.',
+    foto:'perfil7.jpg',
+    produto:'dep7.jpg',
+    txt:'Potência na medida certa, 3 joules bem aproveitados. Ótimo para tiro esportivo recreativo.',
+    curtidas:19
+  },
+  {
+    nome:'Bruno L.',
+    foto:'perfil8.jpg',
+    produto:'dep8.jpg',
+    txt:'Construção robusta em metal, passa muita sensação de realismo. Excelente custo-benefício.',
+    curtidas:13
+  }
+];
+
+
+function estrelas(){ return `<span style="color:#ffa500">★★★★★</span>`; }
+
+function curtidaBtn(id, qtd){
+  return `
+    <button onclick="curtir(this)"
+      style="background:none;border:none;color:#757575;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px">
+      <img src="like.png" style="width:12px;height:12px">
+      útil (${qtd})
+    </button>
+  `;
+}
+
+window.curtir = function(btn){
+  const n = parseInt(btn.textContent.match(/\d+/)[0]) + 1;
+  btn.innerHTML = `<img src="like.png" style="width:12px;height:12px"> útil (${n})`;
+  btn.style.color = '#ee4d2d';
+  btn.onclick = null;
+};
+
+const box = document.getElementById('avaliacoes');
+dados.forEach((d,i)=>{
+  box.innerHTML += `
+  <div style="padding:12px 16px;border-bottom:1px solid #e0e0e0">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="${d.foto}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">
+        <div style="flex:1;font-size:14px">${d.nome}<br>${estrelas()}</div>
+      </div>
+      ${curtidaBtn(i, d.curtidas)}
+    </div>
+    <div style="margin-top:6px;font-size:14px">${d.txt}</div>
+    <img src="${d.produto}" onclick="abrirLightbox(this.src)" style="width:72px;height:72px;object-fit:cover;border-radius:4px;margin-top:6px">
+  </div>`;
+});
+
+/* ---------- CARROSSEL + MODAL ---------- */
+(()=>{
+  const c=document.getElementById('c');
+  const t=document.getElementById('t');
+  const slides=[...t.children];
+    const total=slides.length;
+  let idx=0;
+  const thumbsDiv=document.getElementById('thumbs');
+  slides.forEach((s, i) => {
+  const thumb = document.createElement('div');
+  thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+
+  const slideImg = s.querySelector('img');
+  thumb.style.backgroundImage = slideImg
+    ? `url("${slideImg.getAttribute('src')}")`
+    : s.style.backgroundImage;
+
+  thumb.addEventListener('click', () => move(i));
+  thumbsDiv.appendChild(thumb);
+});
+
+  const thumbs=[...thumbsDiv.children];
+ function move(to){
+  t.style.transition = 'transform .32s ease-out';
+  t.style.transform = `translateX(${-to * 100}%)`;
+
+  thumbs.forEach((th, i) => th.classList.toggle('active', i === to));
+  idx = to;
+}
+
+
+ let startX = 0;
+let currentX = 0;
+let dragging = false;
+
+c.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  currentX = startX;
+  dragging = true;
+  t.style.transition = 'none';
+}, { passive: true });
+
+
+
+c.addEventListener('touchmove', e => {
+  if (!dragging) return;
+
+  currentX = e.touches[0].clientX;
+  const diffX = startX - currentX;
+
+  let raw = -idx * 100 - (diffX / window.innerWidth) * 100;
+  raw = Math.max(raw, -(total - 1) * 100);
+  raw = Math.min(raw, 0);
+
+  t.style.transform = `translateX(${raw}%)`;
+}, { passive: true });
+
+c.addEventListener('touchend', () => {
+  if (!dragging) return;
+  dragging = false;
+
+  const diff = startX - currentX;
+
+  // 👉 SE NÃO ARRASTOU, NÃO MUDA SLIDE
+  if (Math.abs(diff) < 10) {
+    t.style.transition = 'transform .2s ease-out';
+    t.style.transform = `translateX(${-idx * 100}%)`;
+    return;
+  }
+
+  let next = idx;
+
+  if (Math.abs(diff) > 50) {
+    next = diff > 0
+      ? Math.min(idx + 1, total - 1)
+      : Math.max(idx - 1, 0);
+  }
+
+  move(next);
+});
+
+
+
+
+  const modal=document.getElementById('modal');
+  const abrir=document.getElementById('abrirModal');
+  const fechar=document.getElementById('fecharModal');
+  const okBtn=document.getElementById('okBtn');
+  abrir.addEventListener('click',()=>modal.style.display='flex');
+  fechar.addEventListener('click',()=>modal.style.display='none');
+  okBtn.addEventListener('click',()=>modal.style.display='none');
+  modal.addEventListener('click',e=>{if(e.target===modal) modal.style.display='none'});
+})();
+
+function abrirLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function fecharLightbox(){
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+  function abrirChat(){
+  window.location.href = "https://wa.me/+5514991741467";
+}
+
+// Cole abaixo o link de checkout específico de cada cor.
+// Os links ainda precisam ser fornecidos/configurados para cada variação.
+const linksCheckoutPorCor = {
+  "Branco": "COLE_LINK_CHECKOUT_BRANCO_AQUI",
+  "Prata": "COLE_LINK_CHECKOUT_PRATA_AQUI",
+  "Preto": "COLE_LINK_CHECKOUT_PRETO_AQUI",
+  "Cinza/Grafite": "COLE_LINK_CHECKOUT_CINZA_GRAFITE_AQUI",
+  "Vermelho": "COLE_LINK_CHECKOUT_VERMELHO_AQUI"
+};
+let corSelecionada = null;
+const avisoVariacao = document.getElementById('variacaoAviso');
+
+document.querySelectorAll('.variacao-cor').forEach(botao => {
+  botao.addEventListener('click', () => {
+    corSelecionada = botao.dataset.cor;
+    document.querySelectorAll('.variacao-cor').forEach(item => {
+      const ativo = item === botao;
+      item.classList.toggle('selecionada', ativo);
+      item.setAttribute('aria-pressed', ativo ? 'true' : 'false');
+    });
+    avisoVariacao.classList.remove('visivel');
+  });
+});
+
+function irParaCheckoutDaCor(){
+  if(!corSelecionada){
+    avisoVariacao.classList.add('visivel');
+    document.querySelector('.variacoes-box').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  const link = linksCheckoutPorCor[corSelecionada];
+  if(!link || link.startsWith('COLE_LINK_')){
+    alert('A cor ' + corSelecionada + ' foi selecionada, mas o link de checkout dessa variação ainda precisa ser configurado.');
+    return;
+  }
+  window.location.href = link;
+}
+
+function addCarrinho(){
+  irParaCheckoutDaCor();
+}
+
+function comprarAgora(){
+  irParaCheckoutDaCor();
+}
+
+/* ===== TIMER OFERTA RELÂMPAGO ===== */
+(function(){
+  let tempo = 3 * 60 * 60; // 3 horas
+
+  const timerEl = document.getElementById('flashTimer');
+  if(!timerEl) return;
+
+  function atualizar(){
+    const h = String(Math.floor(tempo / 3600)).padStart(2,'0');
+    const m = String(Math.floor((tempo % 3600) / 60)).padStart(2,'0');
+    const s = String(tempo % 60).padStart(2,'0');
+
+    const boxes = timerEl.querySelectorAll('.box');
+    boxes[0].textContent = h;
+    boxes[1].textContent = m;
+    boxes[2].textContent = s;
+
+    if(tempo > 0) tempo--;
+  }
+
+  atualizar();
+  setInterval(atualizar, 1000);
+})();
+
+
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+
+  setTimeout(() => {
+    splash.style.opacity = '0';
+    splash.style.transition = 'opacity .4s ease';
+
+    setTimeout(() => {
+      splash.remove();
+    }, 400);
+
+  }, 2000); // 2 segundos
+});
+
+
+
+
+
+
+  
+</script>
+
+</body>
+</html>
